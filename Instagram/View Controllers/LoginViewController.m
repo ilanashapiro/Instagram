@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
-#import "HomeScreenViewController.h"
+#import "StartScreenViewController.h"
 
 @interface LoginViewController ()
 
@@ -48,7 +48,7 @@
             NSLog(@"User logged in successfully");
             
             // display view controller that needs to shown after successful login
-            [self performSegueWithIdentifier:@"timelineSegue" sender:nil];
+            [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
         }
     }];
 }
@@ -56,8 +56,8 @@
 - (IBAction)didTapBack:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    HomeScreenViewController *homeScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
-    appDelegate.window.rootViewController = homeScreeenViewController;
+    StartScreenViewController *startScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
+    appDelegate.window.rootViewController = startScreeenViewController;
 }
 
 @end

@@ -1,17 +1,18 @@
 //
 //  HomeScreenViewController.m
-//  Instagram
+//  
 //
 //  Created by ilanashapiro on 7/8/19.
-//  Copyright © 2019 ilanashapiro. All rights reserved.
 //
 
 #import "HomeScreenViewController.h"
+#import "Parse/Parse.h"
+#import "AppDelegate.h"
+#import "StartScreenViewController.h"
 
 @interface HomeScreenViewController ()
 
-- (IBAction)didTapLogin:(id)sender;
-- (IBAction)didTapSignUp:(id)sender;
+- (IBAction)didTapLogout:(id)sender;
 
 
 @end
@@ -33,12 +34,14 @@
 }
 */
 
-- (IBAction)didTapLogin:(id)sender {
-   [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+- (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        StartScreenViewController *startScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
+        appDelegate.window.rootViewController = startScreeenViewController;
+        NSLog(@"Logged out!");
+    }];
 }
-
-- (IBAction)didTapSignUp:(id)sender {
-   [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
-}
-
 @end

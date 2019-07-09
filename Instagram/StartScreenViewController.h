@@ -1,5 +1,5 @@
 //
-//  HomeScreenViewController.h
+//  StartScreenViewController.h
 //  
 //
 //  Created by ilanashapiro on 7/8/19.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeScreenViewController : UIViewController
+@interface StartScreenViewController : UIViewController
 
 @end
 

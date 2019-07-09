@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home Screen View Controller-->
+        <!--Start Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="HomeScreenViewController" id="BYZ-38-t0r" customClass="HomeScreenViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartScreenViewController" id="BYZ-38-t0r" customClass="StartScreenViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pto-ms-9wz"/>
+                                    <action selector="didTapLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xt3-u9-KiL"/>
                                     <segue destination="gGL-cq-96r" kind="presentation" identifier="loginSegue" id="Shb-ve-idI"/>
                                 </connections>
                             </button>
@@ -51,8 +51,8 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapSignUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zXs-fC-SZ6"/>
-                                    <segue destination="47v-ko-UED" kind="presentation" identifier="signUpSegue" id="STr-jV-o6q"/>
+                                    <action selector="didTapRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Cm-JR-cRG"/>
+                                    <segue destination="47v-ko-UED" kind="presentation" identifier="registerSegue" id="STr-jV-o6q"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -255,17 +255,17 @@
                     <connections>
                         <outlet property="passwordTextField" destination="0wV-Kr-koH" id="DnW-3u-DZF"/>
                         <outlet property="usernameTextField" destination="W7Z-pC-Eyd" id="yuB-HB-1U5"/>
-                        <segue destination="Ydj-co-9Gj" kind="show" identifier="timelineSegue" id="Twt-2B-ATP"/>
+                        <segue destination="Ydj-co-9Gj" kind="presentation" identifier="homeScreenSegue" id="Twt-2B-ATP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lys-MH-VOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2276" y="-1092"/>
         </scene>
-        <!--Timeline View Controller-->
+        <!--Home Screen View Controller-->
         <scene sceneID="NRY-7i-hSC">
             <objects>
-                <viewController id="Nrj-Tl-qAp" customClass="TimelineViewController" sceneMemberID="viewController">
+                <viewController id="Nrj-Tl-qAp" customClass="HomeScreenViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E9q-Hu-HKa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -284,7 +284,7 @@
                     <navigationItem key="navigationItem" id="1Ii-3U-pVz">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="Mtc-uN-cvT">
                             <connections>
-                                <action selector="didTapLogout:" destination="Nrj-Tl-qAp" id="dmG-jl-a0G"/>
+                                <action selector="didTapLogout:" destination="Nrj-Tl-qAp" id="wZ0-oG-vxF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -352,6 +352,6 @@
         <image name="Icon-60" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qMF-7g-2k5"/>
+        <segue reference="Shb-ve-idI"/>
     </inferredMetricsTieBreakers>
 </document>
