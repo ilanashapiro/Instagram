@@ -27,10 +27,16 @@
     
     [Parse initializeWithConfiguration:config];
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     if (PFUser.currentUser) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
+        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        self.window.rootViewController  = navigationController;
+        //[self.window makeKeyAndVisible];
+    }
+    
+    else {
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
     }
     
     /* code to test server is working
