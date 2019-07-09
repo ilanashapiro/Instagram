@@ -51,31 +51,4 @@
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
-- (void)displayCaptionAlertBox {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Enter Caption for Image"
-                                                                   message:@"Network connection failed."
-                                                            preferredStyle:(UIAlertControllerStyleAlert)];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * _Nonnull action) {
-                                                             
-                                                         }];
-    
-    UIAlertAction *submitTextAction = [UIAlertAction actionWithTitle:@"Submit"
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                                if (alert.textFields.count > 0) {
-                                                                    UITextField *textField = [alert.textFields firstObject];
-                                                                    NSLog(@"Caption is: %@", textField.text); // your text
-                                                                    self.caption = textField.text;
-                                                                }
-                                                            }];
-    // add the OK action to the alert controller
-    [alert addAction:submitTextAction];
-    [alert addAction:cancelAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
 @end

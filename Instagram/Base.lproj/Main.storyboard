@@ -270,32 +270,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTK-ha-D0Z">
-                                <rect key="frame" x="166" y="604" width="43" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="igb-pQ-mCa"/>
-                                    <constraint firstAttribute="width" constant="43" id="rjc-sR-yHE"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="Icon-60"/>
-                                <connections>
-                                    <action selector="didTapCameraButton:" destination="Nrj-Tl-qAp" eventType="touchUpInside" id="O2H-TH-bjG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lh0-yd-hFZ">
-                                <rect key="frame" x="219" y="610" width="92" height="30"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1wj-fj-dVw">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Photo Library"/>
-                                <connections>
-                                    <action selector="didTapPhotoLibraryButton:" destination="Nrj-Tl-qAp" eventType="touchUpInside" id="4DJ-Ga-rcY"/>
-                                </connections>
-                            </button>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="CTK-ha-D0Z" secondAttribute="trailing" constant="166" id="7c7-Ah-n8j"/>
-                            <constraint firstItem="CTK-ha-D0Z" firstAttribute="leading" secondItem="E9q-Hu-HKa" secondAttribute="leading" constant="166" id="lIj-Yc-nls"/>
-                            <constraint firstAttribute="bottom" secondItem="CTK-ha-D0Z" secondAttribute="bottom" constant="20" id="laG-9f-bRD"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Etg-9o-Zak"/>
                     </view>
                     <navigationItem key="navigationItem" id="1Ii-3U-pVz">
@@ -304,11 +285,73 @@
                                 <action selector="didTapLogout:" destination="Nrj-Tl-qAp" id="wZ0-oG-vxF"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="OeJ-Aq-EIg">
+                            <connections>
+                                <segue destination="5IJ-Is-DxM" kind="presentation" id="6Xw-BA-CrT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ml0-GY-AcQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5136.8000000000002" y="43.628185907046479"/>
+        </scene>
+        <!--Post View Controller-->
+        <scene sceneID="NQ3-zy-hgS">
+            <objects>
+                <viewController id="UPo-yK-TgX" customClass="PostViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="APJ-Xv-baa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9yU-KL-pBy">
+                                <rect key="frame" x="0.0" y="64" width="375" height="391"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter caption" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IrE-df-5HL">
+                                <rect key="frame" x="0.0" y="450" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37f-nx-oZ6">
+                                <rect key="frame" x="310" y="617" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="didTapSubmitButton:" destination="UPo-yK-TgX" eventType="touchUpInside" id="093-jD-tyf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvz-2d-8pO">
+                                <rect key="frame" x="141" y="617" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Photo Library"/>
+                                <connections>
+                                    <action selector="didTapPhotoLibraryButton:" destination="UPo-yK-TgX" eventType="touchUpInside" id="x8i-WR-OMV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILr-2Z-MVe">
+                                <rect key="frame" x="16" y="617" width="54" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="didTapCameraButton:" destination="UPo-yK-TgX" eventType="touchUpInside" id="LdZ-eY-Scs"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="7rg-Jl-pJL"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7sF-D8-Nkh"/>
+                    <connections>
+                        <outlet property="captionTextField" destination="IrE-df-5HL" id="cfP-jv-Oka"/>
+                        <outlet property="postImageView" destination="9yU-KL-pBy" id="dc9-KP-bNy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aPO-OY-7Au" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6959.1999999999998" y="46.326836581709152"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gya-Do-dkU">
@@ -363,6 +406,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZA-Jp-aDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1140" y="1238"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZWJ-C3-yAM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5IJ-Is-DxM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OG7-7Y-Cb8">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UPo-yK-TgX" kind="relationship" relationship="rootViewController" id="92q-WB-WmX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ptc-57-cja" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6020" y="46.326836581709152"/>
         </scene>
     </scenes>
     <resources>
