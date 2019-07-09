@@ -7,8 +7,13 @@
 //
 
 #import "TimelineViewController.h"
+#import "Parse/Parse.h"
+#import "AppDelegate.h"
+#import "HomeScreenViewController.h"
 
 @interface TimelineViewController ()
+
+- (IBAction)didTapLogout:(id)sender;
 
 @end
 
@@ -29,4 +34,14 @@
 }
 */
 
+- (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        HomeScreenViewController *homeScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
+        appDelegate.window.rootViewController = homeScreeenViewController;
+        NSLog(@"Logged out!");
+    }];
+}
 @end

@@ -8,6 +8,8 @@
 
 #import "RegisterViewController.h"
 #import "Parse/Parse.h"
+#import "AppDelegate.h"
+#import "HomeScreenViewController.h"
 
 @interface RegisterViewController ()
 
@@ -16,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 - (IBAction)didTapRegister:(id)sender;
+- (IBAction)didTapBack:(id)sender;
+
 
 @end
 
@@ -54,6 +58,13 @@
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
     }];
+}
+
+- (IBAction)didTapBack:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeScreenViewController *homeScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
+    appDelegate.window.rootViewController = homeScreeenViewController;
 }
 
 @end
