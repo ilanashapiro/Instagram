@@ -38,7 +38,7 @@
     _post = post;
     //NSLog(@"%@", self.postPFImageView.file);
     self.postPFImageView.file = post[@"image"];
-    //NSLog(@"%@", self.postPFImageView.file);
+    NSLog(@"%@", post[@"image"]);
     [self.postPFImageView loadInBackground];
     //NSLog(@"%@", self.postPFImageView.file);
     self.nameLabel.text = post.author.username;

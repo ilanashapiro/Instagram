@@ -38,12 +38,23 @@
 */
 
 - (IBAction)didTapLogin:(id)sender {
+    if ([self.usernameTextField.text isEqual:@""]) {
+        [self showErrorAlertWithMessage:@"Username missing"];
+        return;
+    }
+    
+    if ([self.passwordTextField.text isEqual:@""]) {
+        [self showErrorAlertWithMessage:@"Password missing"];
+        return;
+    }
+    
     NSString *username = self.usernameTextField.text;
     NSString *password = self.passwordTextField.text;
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
+            [self showErrorAlertWithMessage:error.localizedDescription];
         } else {
             NSLog(@"User logged in successfully");
             
@@ -59,5 +70,22 @@
     StartScreenViewController *startScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
     appDelegate.window.rootViewController = startScreeenViewController;
 }
+
+- (void)showErrorAlertWithMessage:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:message
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+}
+
 
 @end

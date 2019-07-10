@@ -44,6 +44,16 @@
     // initialize a user object
     PFUser *newUser = [PFUser user];
     
+    if ([self.usernameTextField.text isEqual:@""]) {
+        [self showErrorAlertWithMessage:@"Username missing"];
+        return;
+    }
+    
+    if ([self.passwordTextField.text isEqual:@""]) {
+        [self showErrorAlertWithMessage:@"Password missing"];
+        return;
+    }
+    
     // set user properties
     newUser.username = self.usernameTextField.text;
     newUser.email = self.emailTextField.text;
@@ -53,9 +63,10 @@
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
+            [self showErrorAlertWithMessage:error.localizedDescription];
         } else {
             NSLog(@"User registered successfully");
-            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+            [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
         }
     }];
 }
@@ -66,5 +77,22 @@
     StartScreenViewController *startScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
     appDelegate.window.rootViewController = startScreeenViewController;
 }
+
+- (void)showErrorAlertWithMessage:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:message
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+}
+
 
 @end
