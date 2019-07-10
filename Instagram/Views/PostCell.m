@@ -22,10 +22,13 @@
 - (void)setPost:(Post *)post {
     _post = post;
     
+    //NSLog(@"%@", self.postPFImageView.file);
     self.postPFImageView.file = post[@"image"];
     [self.postPFImageView loadInBackground];
+    //NSLog(@"%@", post.author.username);
     
     self.nameLabel.text = post.author.username;
+    //NSLog(@"%@", self.nameLabel.text, post.author.username);
     self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
     self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
 }
