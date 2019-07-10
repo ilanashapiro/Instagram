@@ -12,7 +12,7 @@
 #import "StartScreenViewController.h"
 #import "Post.h"
 #import "PostCell.h"
-@import ParseUI;
+@import Parse;
 
 @interface HomeScreenViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -28,7 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    [self fetchPosts];
 }
 
 /*
@@ -96,8 +99,9 @@
 
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+     NSLog(@"cell for row");
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-    
+   
     Post *post = self.postsArray[indexPath.row];
     cell.post = post;
     
