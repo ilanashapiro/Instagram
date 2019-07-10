@@ -8,11 +8,26 @@
 
 #import "PostCell.h"
 
+@interface PostCell()
+
+@end
+
 @implementation PostCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)setPost:(Post *)post {
+    _post = post;
+    
+    self.postPFImageView.file = post[@"image"];
+    [self.postPFImageView loadInBackground];
+    
+    self.nameLabel.text = post.author.username;
+    self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
+    self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -11,13 +11,15 @@
 #import "AppDelegate.h"
 #import "StartScreenViewController.h"
 #import "Post.h"
+#import "PostCell.h"
 @import ParseUI;
 
-@interface HomeScreenViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface HomeScreenViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *postsArray;
 
 @end
 
@@ -61,9 +63,12 @@
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             // do something with the data fetched
+            self.postsArray = posts;
+            [self.tableView reloadData];
         }
         else {
             // handle error
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
     }];
 }
@@ -89,5 +94,18 @@
     
 }*/
 
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    
+    Post *post = self.postsArray[indexPath.row];
+    cell.post = post;
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.postsArray.count;
+}
 
 @end
