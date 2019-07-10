@@ -13,6 +13,8 @@
 		4755538E22D4661100CC890C /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755538D22D4661100CC890C /* Post.m */; };
 		4755539122D5372200CC890C /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755539022D5372200CC890C /* PostViewController.m */; };
 		4755539422D5556600CC890C /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755539322D5556600CC890C /* PostCell.m */; };
+		4755539922D5ABE200CC890C /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755539822D5ABE200CC890C /* DetailsViewController.m */; };
+		4755539F22D5B7DA00CC890C /* PostDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755539E22D5B7DA00CC890C /* PostDetailsView.m */; };
 		47702DFD22D3FB8D00371A36 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47702DFC22D3FB8D00371A36 /* AppDelegate.m */; };
 		47702E0322D3FB8D00371A36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47702E0122D3FB8D00371A36 /* Main.storyboard */; };
 		47702E0522D3FB8E00371A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47702E0422D3FB8E00371A36 /* Assets.xcassets */; };
@@ -54,6 +56,10 @@
 		4755539022D5372200CC890C /* PostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		4755539222D5556600CC890C /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		4755539322D5556600CC890C /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		4755539722D5ABE200CC890C /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		4755539822D5ABE200CC890C /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		4755539D22D5B7DA00CC890C /* PostDetailsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PostDetailsView.h; path = /Users/ilanashapiro/Desktop/Instagram/Instagram/Views/PostDetailsView.h; sourceTree = "<absolute>"; };
+		4755539E22D5B7DA00CC890C /* PostDetailsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PostDetailsView.m; path = /Users/ilanashapiro/Desktop/Instagram/Instagram/Views/PostDetailsView.m; sourceTree = "<absolute>"; };
 		47702DF822D3FB8D00371A36 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47702DFB22D3FB8D00371A36 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		47702DFC22D3FB8D00371A36 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -125,6 +131,8 @@
 			children = (
 				4755539222D5556600CC890C /* PostCell.h */,
 				4755539322D5556600CC890C /* PostCell.m */,
+				4755539D22D5B7DA00CC890C /* PostDetailsView.h */,
+				4755539E22D5B7DA00CC890C /* PostDetailsView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +207,8 @@
 				4755538A22D463B000CC890C /* StartScreenViewController.m */,
 				4755538F22D5372200CC890C /* PostViewController.h */,
 				4755539022D5372200CC890C /* PostViewController.m */,
+				4755539722D5ABE200CC890C /* DetailsViewController.h */,
+				4755539822D5ABE200CC890C /* DetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -447,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47702E0B22D3FB8E00371A36 /* main.m in Sources */,
+				4755539922D5ABE200CC890C /* DetailsViewController.m in Sources */,
 				4755538B22D463B000CC890C /* StartScreenViewController.m in Sources */,
 				47702DFD22D3FB8D00371A36 /* AppDelegate.m in Sources */,
 				47702E3F22D411D600371A36 /* RegisterViewController.m in Sources */,
@@ -455,6 +466,7 @@
 				4755538822D45AAC00CC890C /* HomeScreenViewController.m in Sources */,
 				47702E3922D40DC400371A36 /* LoginViewController.m in Sources */,
 				4755538E22D4661100CC890C /* Post.m in Sources */,
+				4755539F22D5B7DA00CC890C /* PostDetailsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
