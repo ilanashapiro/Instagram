@@ -23,7 +23,6 @@
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.44811556990000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="244" id="Mm9-AW-Pjc"/>
-                                    <constraint firstAttribute="height" constant="36" id="Sdb-mw-ze9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Login with Instagram">
@@ -58,13 +57,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="lfa-n9-Jjb" firstAttribute="top" secondItem="qsv-1P-nQI" secondAttribute="bottom" constant="8" id="68y-94-8Kk"/>
+                            <constraint firstItem="qsv-1P-nQI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="65" id="8y5-Bm-FXF"/>
                             <constraint firstAttribute="trailing" secondItem="lfa-n9-Jjb" secondAttribute="trailing" constant="162" id="KQu-o5-JRf"/>
-                            <constraint firstAttribute="bottom" secondItem="qsv-1P-nQI" secondAttribute="bottom" constant="316" id="W5P-Zd-MRP"/>
-                            <constraint firstItem="qsv-1P-nQI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="65" id="Xdk-R5-HHJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qsv-1P-nQI" secondAttribute="trailing" constant="66" id="YIh-HJ-0bj"/>
                             <constraint firstAttribute="bottom" secondItem="lfa-n9-Jjb" secondAttribute="bottom" constant="278" id="c9c-iX-pTy"/>
-                            <constraint firstAttribute="trailing" secondItem="qsv-1P-nQI" secondAttribute="trailing" constant="66" id="d03-Zz-WdM"/>
                             <constraint firstAttribute="trailing" secondItem="6Su-lp-uUw" secondAttribute="trailing" constant="159" id="eXw-4C-EOc"/>
-                            <constraint firstItem="qsv-1P-nQI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="295" id="gcE-QU-2v6"/>
                             <constraint firstItem="lfa-n9-Jjb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="159" id="ikw-jh-XjN"/>
                             <constraint firstItem="qsv-1P-nQI" firstAttribute="top" secondItem="6Su-lp-uUw" secondAttribute="bottom" constant="38" id="lgu-n9-uxO"/>
                             <constraint firstItem="6Su-lp-uUw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="159" id="yj0-aw-fIl"/>
@@ -302,14 +300,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdR-FK-2PU">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdR-FK-2PU">
                                                     <rect key="frame" x="10" y="250" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Eu3-cG-TmR"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="TBp-2X-73D"/>
                                                         <constraint firstAttribute="width" constant="30" id="Tgc-wX-Dng"/>
                                                     </constraints>
-                                                    <state key="normal" title="Like"/>
+                                                    <state key="normal" title="Like" image="favor-icon"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VnF-dD-7k0">
                                                     <rect key="frame" x="60" y="250" width="67" height="30"/>
@@ -319,13 +317,13 @@
                                                     </constraints>
                                                     <state key="normal" title="Comment"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Atw-XL-Gpt">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Atw-XL-Gpt">
                                                     <rect key="frame" x="147" y="250" width="36" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Utj-fT-CUm"/>
                                                         <constraint firstAttribute="width" constant="36" id="zhv-oI-sPa"/>
                                                     </constraints>
-                                                    <state key="normal" title="Send"/>
+                                                    <state key="normal" image="sendicon"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="janedoe comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWc-75-yjT">
                                                     <rect key="frame" x="10" y="314" width="137.5" height="20.5"/>
@@ -431,11 +429,11 @@
         <scene sceneID="Kl4-1J-KZu">
             <objects>
                 <viewController id="Ry4-fk-UPP" customClass="DetailsViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="B7m-Xb-c4P" customClass="PostDetailsView">
+                    <view key="view" contentMode="scaleToFill" id="B7m-Xb-c4P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ikb-xX-BfR">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ikb-xX-BfR" customClass="PostDetailsView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5NQ-bg-cTr" customClass="PFImageView">
@@ -476,14 +474,6 @@
                                         </constraints>
                                         <state key="normal" title="Comment"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJo-Ra-iFs">
-                                        <rect key="frame" x="147" y="311" width="36" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="36" id="IRJ-0G-Uc1"/>
-                                            <constraint firstAttribute="height" constant="30" id="qKf-VU-oWd"/>
-                                        </constraints>
-                                        <state key="normal" title="Send"/>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="janedoe comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qu-dH-qgC">
                                         <rect key="frame" x="10" y="375" width="137.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -509,6 +499,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJo-Ra-iFs">
+                                        <rect key="frame" x="147" y="311" width="36" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="IRJ-0G-Uc1"/>
+                                            <constraint firstAttribute="height" constant="30" id="qKf-VU-oWd"/>
+                                        </constraints>
+                                        <state key="normal" title="Send"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -539,6 +537,17 @@
                                     <constraint firstItem="ocj-ns-Q87" firstAttribute="leading" secondItem="Ikb-xX-BfR" secondAttribute="leading" constant="10" id="zNQ-fQ-eya"/>
                                     <constraint firstItem="yS0-K2-XEb" firstAttribute="top" secondItem="ocj-ns-Q87" secondAttribute="top" id="zqB-oq-wkQ"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="bookmarkButton" destination="yS0-K2-XEb" id="9WU-vK-eKq"/>
+                                    <outlet property="captionLabel" destination="4qu-dH-qgC" id="th6-YP-JEN"/>
+                                    <outlet property="commentButton" destination="dxM-ff-2Yf" id="5NV-Fv-fGO"/>
+                                    <outlet property="dateLabel" destination="tEj-kO-PLB" id="aVS-aB-Na5"/>
+                                    <outlet property="likeButton" destination="ocj-ns-Q87" id="QZx-zI-hFv"/>
+                                    <outlet property="messageButton" destination="kJo-Ra-iFs" id="hxb-Rr-3uj"/>
+                                    <outlet property="nameLabel" destination="jDe-gC-UyL" id="tPC-iT-4Ca"/>
+                                    <outlet property="numberLikesLabel" destination="pRS-KR-SFy" id="8gc-fc-paU"/>
+                                    <outlet property="postPFImageView" destination="5NQ-bg-cTr" id="l7w-Xx-cT7"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -549,18 +558,10 @@
                             <constraint firstAttribute="trailing" secondItem="Ikb-xX-BfR" secondAttribute="trailing" id="vfo-QM-Cau"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OH2-Ud-UHE"/>
-                        <connections>
-                            <outlet property="bookmarkButton" destination="yS0-K2-XEb" id="zvL-io-AdQ"/>
-                            <outlet property="captionLabel" destination="4qu-dH-qgC" id="yTu-Ni-wrS"/>
-                            <outlet property="commentButton" destination="dxM-ff-2Yf" id="k1m-re-GtK"/>
-                            <outlet property="dateLabel" destination="tEj-kO-PLB" id="2UD-wF-0Wh"/>
-                            <outlet property="likeButton" destination="ocj-ns-Q87" id="QGa-xY-A1k"/>
-                            <outlet property="messageButton" destination="kJo-Ra-iFs" id="poM-9i-XBH"/>
-                            <outlet property="nameLabel" destination="jDe-gC-UyL" id="IKQ-UG-FhS"/>
-                            <outlet property="numberLikesLabel" destination="pRS-KR-SFy" id="ELD-3F-RhL"/>
-                            <outlet property="postPFImageView" destination="5NQ-bg-cTr" id="a28-ef-l2h"/>
-                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="postDetailsView" destination="Ikb-xX-BfR" id="KVo-r2-fS1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zCE-0n-vqU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -631,7 +632,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7rg-Jl-pJL"/>
                     </view>
-                    <navigationItem key="navigationItem" id="7sF-D8-Nkh"/>
+                    <navigationItem key="navigationItem" id="7sF-D8-Nkh">
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="piN-qW-zGZ"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="captionTextField" destination="IrE-df-5HL" id="cfP-jv-Oka"/>
                         <outlet property="postImageView" destination="9yU-KL-pBy" id="dc9-KP-bNy"/>
@@ -716,6 +719,8 @@
     </scenes>
     <resources>
         <image name="Icon-60" width="60" height="60"/>
+        <image name="favor-icon" width="30" height="30"/>
+        <image name="sendicon" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="f1m-aI-7Af"/>

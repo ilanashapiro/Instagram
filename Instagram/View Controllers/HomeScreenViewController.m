@@ -51,7 +51,6 @@
         
         DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
         detailsViewController.post = post;
-        [self addChildViewController:detailsViewController];
         detailsViewController.delegate = self;
         NSLog(@"Tapping on a post!");
     }
@@ -103,6 +102,7 @@
    
     Post *post = self.postsArray[indexPath.row];
     cell.post = post;
+
     
     return cell;
 }

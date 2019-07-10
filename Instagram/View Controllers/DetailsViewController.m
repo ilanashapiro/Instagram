@@ -11,6 +11,8 @@
 
 @interface DetailsViewController ()
 
+@property (strong, nonatomic) IBOutlet PostDetailsView *postDetailsView;
+
 @end
 
 @implementation DetailsViewController
@@ -18,7 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    PostDetailsView *postDetailsView = [[PostDetailsView alloc] initWithPost:self.post];
+    //[self.view layoutIfNeeded]; (don't use now) -- this line lays out the views, what happens in between segue and view completely loading
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self _updateDetailsView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -27,6 +33,12 @@
         [self.delegate updateData:self];
     }
 }
+
+- (void)_updateDetailsView {
+    self.postDetailsView.post = _post;
+}
+
+
 
 /*
 #pragma mark - Navigation

@@ -21,22 +21,10 @@
     // Drawing code
 }
 */
-- (instancetype)initWithPost:(Post *)post {
-    self = [super init];
-    if (self) {
-        //NSLog(@"Not null");
-        self.post = post;
-        //NSLog(@"%@", self.post);
-    }
-    else {
-        //NSLog(@"null!!");
-    }
-    return self;
-}
 
 - (void)setPost:(Post *)post {
     _post = post;
-    //NSLog(@"%@", self.postPFImageView.file);
+    NSLog(@"Post posted!!!!");
     self.postPFImageView.file = post[@"image"];
     NSLog(@"%@", post[@"image"]);
     [self.postPFImageView loadInBackground];

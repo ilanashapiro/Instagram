@@ -102,11 +102,19 @@
 - (IBAction)didTapSubmitButton:(id)sender {
     if (self.postImageView.image != nil) {
         [Post postUserImage:self.postImageView.image withCaption:self.captionTextField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        [self goToViewControllerEmbeddedInNavigationControllerName:@"HomeScreenViewController"];
+            if (succeeded) {
+                [self goToViewControllerEmbeddedInNavigationControllerName:@"HomeScreenViewController"];
+                    NSLog(@"Post posted!");
+            }
+            else {
+                [self showErrorAlertWithMessage:error.localizedDescription];
+            }
+        
         }];
     }
+    
     else {
-        [self goToViewControllerEmbeddedInNavigationControllerName:@"HomeScreenViewController"];
+        [self showErrorAlertWithMessage:@"Choose image before posting."];
     }
 }
 
@@ -116,7 +124,23 @@
     UIViewController *homeScreenViewController = [storyboard instantiateViewControllerWithIdentifier:name];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeScreenViewController];
     appDelegate.window.rootViewController = navigationController;
-    NSLog(@"Post posted!");
 }
+
+- (void)showErrorAlertWithMessage:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:message
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+}
+
 
 @end

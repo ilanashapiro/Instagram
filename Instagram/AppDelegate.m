@@ -34,7 +34,6 @@
         self.window.rootViewController  = navigationController;
         //[self.window makeKeyAndVisible];
     }
-    
     else {
         self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
     }

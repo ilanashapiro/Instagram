@@ -25,8 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) Post *post;
 
-- (instancetype)initWithPost:(Post *)post;
-
 @end
 
 NS_ASSUME_NONNULL_END
