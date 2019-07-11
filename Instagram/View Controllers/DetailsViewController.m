@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) IBOutlet PostDetailsView *postDetailsView;
 
+
 @end
 
 @implementation DetailsViewController
@@ -37,7 +38,6 @@
 - (void)updateDetailsView {
     self.postDetailsView.post = self.post;
 }
-
 
 
 /*

@@ -332,7 +332,10 @@
                                             <constraint firstAttribute="width" constant="30" id="eoG-zb-4js"/>
                                         </constraints>
                                         <state key="normal" image="likeicon"/>
-                                        <state key="selected" image="favor-icon-red"/>
+                                        <state key="selected" image="likeselected"/>
+                                        <connections>
+                                            <action selector="didTapLike:" destination="Ikb-xX-BfR" eventType="touchUpInside" id="Wuc-K0-Ps9"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxM-ff-2Yf">
                                         <rect key="frame" x="60" y="311" width="29" height="30"/>
@@ -407,9 +410,9 @@
                                 <connections>
                                     <outlet property="bookmarkButton" destination="vLM-aa-xdA" id="HjY-oP-lUO"/>
                                     <outlet property="captionLabel" destination="4qu-dH-qgC" id="th6-YP-JEN"/>
-                                    <outlet property="commentButton" destination="dxM-ff-2Yf" id="5NV-Fv-fGO"/>
+                                    <outlet property="commentButton" destination="dxM-ff-2Yf" id="TA5-DR-GTl"/>
                                     <outlet property="dateLabel" destination="tEj-kO-PLB" id="aVS-aB-Na5"/>
-                                    <outlet property="likeButton" destination="ocj-ns-Q87" id="QZx-zI-hFv"/>
+                                    <outlet property="likeButton" destination="ocj-ns-Q87" id="58Q-ra-E4p"/>
                                     <outlet property="messageButton" destination="kJo-Ra-iFs" id="hxb-Rr-3uj"/>
                                     <outlet property="nameLabel" destination="jDe-gC-UyL" id="tPC-iT-4Ca"/>
                                     <outlet property="numberLikesLabel" destination="pRS-KR-SFy" id="8gc-fc-paU"/>
@@ -870,7 +873,6 @@
     <resources>
         <image name="bookmark_outline_24" width="24" height="24"/>
         <image name="comment_outline_24" width="24" height="24"/>
-        <image name="favor-icon-red" width="30" height="30"/>
         <image name="instagram" width="2400" height="678"/>
         <image name="likeicon" width="180" height="170"/>
         <image name="likeselected" width="186" height="160"/>
@@ -879,6 +881,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="6Xw-BA-CrT"/>
         <segue reference="LVs-zH-rgg"/>
-        <segue reference="G0Z-Md-jj6"/>
+        <segue reference="Y8t-cs-961"/>
     </inferredMetricsTieBreakers>
 </document>
