@@ -18,8 +18,8 @@
 - (IBAction)didTapLogout:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *postsArray;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSArray *postsArray;
 
 @end
 
@@ -46,9 +46,9 @@
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *post = self.postsArray[indexPath.row];
-        NSLog(@"%@", post);
         DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
         detailsViewController.post = post;
+        detailsViewController.postCellIndexPath = indexPath;
         detailsViewController.delegate = self;
         NSLog(@"Tapping on a post!");
     }
@@ -109,8 +109,11 @@
     return self.postsArray.count;
 }
 
-- (void)updateData:(nonnull UIViewController *)viewController {
-    //[self fetchPosts];
+- (void)updateData:(nonnull DetailsViewController *)detailsViewController {
+    Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
+    post.liked = detailsViewController.postDetailsView.post.liked;
+    post.likeCount = detailsViewController.postDetailsView.post.likeCount;
+    [self.tableView reloadData];
 }
 
 @end

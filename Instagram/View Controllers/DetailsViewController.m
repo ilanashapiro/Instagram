@@ -11,9 +11,6 @@
 
 @interface DetailsViewController ()
 
-@property (strong, nonatomic) IBOutlet PostDetailsView *postDetailsView;
-
-
 @end
 
 @implementation DetailsViewController
