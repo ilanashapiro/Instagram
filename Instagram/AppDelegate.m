@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+
 @interface AppDelegate ()
 
 @end
@@ -29,10 +30,15 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     if (PFUser.currentUser) {
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:@"HomeScreenViewController" bundle:nil];
-        tabBarController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"All Posts" image:nil tag:nil];
+        UITabBarController *tabBarController = [[UITabBarController alloc] init];
+        
+        UIViewController *homeScreenViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
+       
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeScreenViewController];
+        UITabBarItem *allPostsTab = [[UITabBarItem alloc] initWithTitle:@"All Posts" image:nil tag:1];
+        homeScreenViewController.title = @"All Posts";
+        [homeScreenViewController setTabBarItem:allPostsTab];
+        
         [tabBarController setViewControllers:@[navigationController] animated:YES];
         self.window.rootViewController = tabBarController;
         //[self.window makeKeyAndVisible];
