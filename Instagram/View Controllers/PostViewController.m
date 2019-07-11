@@ -103,7 +103,7 @@
     if (self.postImageView.image != nil) {
         [Post postUserImage:self.postImageView.image withCaption:self.captionTextField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self goToViewControllerEmbeddedInNavigationControllerName:@"HomeScreenViewController"];
+                [self returnToTabBarController];
                     NSLog(@"Post posted!");
             }
             else {
@@ -118,12 +118,26 @@
     }
 }
 
-- (void)goToViewControllerEmbeddedInNavigationControllerName:(NSString *)name{
+- (void)returnToTabBarController {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *homeScreenViewController = [storyboard instantiateViewControllerWithIdentifier:name];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeScreenViewController];
-    appDelegate.window.rootViewController = navigationController;
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
+    UIViewController *homeScreenViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
+    UINavigationController *homeScreenNavigationController = [[UINavigationController alloc] initWithRootViewController:homeScreenViewController];
+    UITabBarItem *allPostsTab = [[UITabBarItem alloc] initWithTitle:@"All Posts" image:nil tag:1];
+    homeScreenViewController.title = @"All Posts";
+    [homeScreenViewController setTabBarItem:allPostsTab];
+    
+    UIViewController *profileFeedViewController = [storyboard instantiateViewControllerWithIdentifier:@"ProfileFeedViewController"];
+    UINavigationController *profileFeedNavigationController = [[UINavigationController alloc] initWithRootViewController:profileFeedViewController];
+    UITabBarItem *profilePostsTab = [[UITabBarItem alloc] initWithTitle:@"Your Posts" image:nil tag:1];
+    profileFeedViewController.title = @"Your Posts";
+    [profileFeedViewController setTabBarItem:profilePostsTab];
+    
+    [tabBarController setViewControllers:@[homeScreenNavigationController, profileFeedNavigationController] animated:YES];
+    appDelegate.window.rootViewController = tabBarController;
 }
 
 - (void)showErrorAlertWithMessage:(NSString *)message {

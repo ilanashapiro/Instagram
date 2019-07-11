@@ -78,7 +78,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    [postQuery whereKey:@"username" equalTo:[[PFUser currentUser] objectForKey:@"username"]];
+    [postQuery whereKey:@"author" equalTo:[[PFUser currentUser] objectId]];
     postQuery.limit = 20;
     
     // fetch data asynchronously
