@@ -31,7 +31,10 @@
     if (PFUser.currentUser) {
         UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        self.window.rootViewController  = navigationController;
+        UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:@"HomeScreenViewController" bundle:nil];
+        tabBarController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"All Posts" image:nil tag:nil];
+        [tabBarController setViewControllers:@[navigationController] animated:YES];
+        self.window.rootViewController = tabBarController;
         //[self.window makeKeyAndVisible];
     }
     else {
