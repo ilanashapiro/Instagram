@@ -33,18 +33,23 @@
         UITabBarController *tabBarController = [[UITabBarController alloc] init];
         
         UIViewController *homeScreenViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
-       
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeScreenViewController];
+        UINavigationController *homeScreenNavigationController = [[UINavigationController alloc] initWithRootViewController:homeScreenViewController];
         UITabBarItem *allPostsTab = [[UITabBarItem alloc] initWithTitle:@"All Posts" image:nil tag:1];
         homeScreenViewController.title = @"All Posts";
         [homeScreenViewController setTabBarItem:allPostsTab];
         
-        [tabBarController setViewControllers:@[navigationController] animated:YES];
+        UIViewController *profileFeedViewController = [storyboard instantiateViewControllerWithIdentifier:@"ProfileFeedViewController"];
+        UINavigationController *profileFeedNavigationController = [[UINavigationController alloc] initWithRootViewController:profileFeedViewController];
+        UITabBarItem *profilePostsTab = [[UITabBarItem alloc] initWithTitle:@"Your Posts" image:nil tag:1];
+        profileFeedViewController.title = @"Your Posts";
+        [profileFeedViewController setTabBarItem:profilePostsTab];
+        
+        [tabBarController setViewControllers:@[homeScreenNavigationController, profileFeedNavigationController] animated:YES];
         self.window.rootViewController = tabBarController;
         //[self.window makeKeyAndVisible];
     }
     else {
-        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     }
     
     /* code to test server is working

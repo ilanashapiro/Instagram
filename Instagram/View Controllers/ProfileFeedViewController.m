@@ -1,11 +1,12 @@
 //
-//  HomeScreenViewController.m
-//  
+//  ProfileFeedViewController.m
+//  Instagram
 //
-//  Created by ilanashapiro on 7/8/19.
+//  Created by ilanashapiro on 7/10/19.
+//  Copyright © 2019 ilanashapiro. All rights reserved.
 //
 
-#import "HomeScreenViewController.h"
+#import "ProfileFeedViewController.h"
 #import "AppDelegate.h"
 #import "Post.h"
 #import "PostCell.h"
@@ -13,7 +14,7 @@
 #import "LoginViewController.h"
 @import Parse;
 
-@interface HomeScreenViewController () <DetailsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileFeedViewController () <DetailsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 
@@ -23,7 +24,7 @@
 
 @end
 
-@implementation HomeScreenViewController
+@implementation ProfileFeedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,18 +43,17 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
+    if ([segue.identifier isEqualToString:@"segueToDetails"]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *post = self.postsArray[indexPath.row];
-        NSLog(@"%@", post);
+        
         DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
         detailsViewController.post = post;
         detailsViewController.delegate = self;
         NSLog(@"Tapping on a post!");
     }
 }
-
 
 - (void)createRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -78,6 +78,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
+    [postQuery whereKey:@"author.username" equalTo:@"shapiro.ilana"];
     postQuery.limit = 20;
     
     // fetch data asynchronously
@@ -97,10 +98,10 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
-   
+    
     Post *post = self.postsArray[indexPath.row];
     cell.post = post;
-
+    
     
     return cell;
 }
@@ -110,7 +111,7 @@
 }
 
 - (void)updateData:(nonnull UIViewController *)viewController {
-    //[self fetchPosts];
+    
 }
 
 @end

@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3B99113A2C9860E4AE5B8B7E /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1979E4F382F84D1A4E60E9A /* Pods_Instagram.framework */; };
+		473BC24522D701370022F7DA /* ProfileFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473BC24422D701370022F7DA /* ProfileFeedViewController.m */; };
 		4755538822D45AAC00CC890C /* HomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755538622D45AAC00CC890C /* HomeScreenViewController.m */; };
-		4755538B22D463B000CC890C /* StartScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755538A22D463B000CC890C /* StartScreenViewController.m */; };
 		4755538E22D4661100CC890C /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755538D22D4661100CC890C /* Post.m */; };
 		4755539122D5372200CC890C /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755539022D5372200CC890C /* PostViewController.m */; };
 		4755539422D5556600CC890C /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755539322D5556600CC890C /* PostCell.m */; };
@@ -46,10 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		473BC24322D701370022F7DA /* ProfileFeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileFeedViewController.h; sourceTree = "<group>"; };
+		473BC24422D701370022F7DA /* ProfileFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileFeedViewController.m; sourceTree = "<group>"; };
 		4755538622D45AAC00CC890C /* HomeScreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HomeScreenViewController.m; path = "/Users/ilanashapiro/Desktop/Instagram/Instagram/View Controllers/HomeScreenViewController.m"; sourceTree = "<absolute>"; };
 		4755538722D45AAC00CC890C /* HomeScreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HomeScreenViewController.h; path = "/Users/ilanashapiro/Desktop/Instagram/Instagram/View Controllers/HomeScreenViewController.h"; sourceTree = "<absolute>"; };
-		4755538922D463B000CC890C /* StartScreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartScreenViewController.h; sourceTree = "<group>"; };
-		4755538A22D463B000CC890C /* StartScreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartScreenViewController.m; sourceTree = "<group>"; };
 		4755538C22D4661100CC890C /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Post.h; path = Instagram/Models/Post.h; sourceTree = SOURCE_ROOT; };
 		4755538D22D4661100CC890C /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = Instagram/Models/Post.m; sourceTree = SOURCE_ROOT; };
 		4755538F22D5372200CC890C /* PostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
@@ -203,8 +203,8 @@
 				47702E3E22D411D600371A36 /* RegisterViewController.m */,
 				4755538722D45AAC00CC890C /* HomeScreenViewController.h */,
 				4755538622D45AAC00CC890C /* HomeScreenViewController.m */,
-				4755538922D463B000CC890C /* StartScreenViewController.h */,
-				4755538A22D463B000CC890C /* StartScreenViewController.m */,
+				473BC24322D701370022F7DA /* ProfileFeedViewController.h */,
+				473BC24422D701370022F7DA /* ProfileFeedViewController.m */,
 				4755538F22D5372200CC890C /* PostViewController.h */,
 				4755539022D5372200CC890C /* PostViewController.m */,
 				4755539722D5ABE200CC890C /* DetailsViewController.h */,
@@ -458,7 +458,6 @@
 			files = (
 				47702E0B22D3FB8E00371A36 /* main.m in Sources */,
 				4755539922D5ABE200CC890C /* DetailsViewController.m in Sources */,
-				4755538B22D463B000CC890C /* StartScreenViewController.m in Sources */,
 				47702DFD22D3FB8D00371A36 /* AppDelegate.m in Sources */,
 				47702E3F22D411D600371A36 /* RegisterViewController.m in Sources */,
 				4755539122D5372200CC890C /* PostViewController.m in Sources */,
@@ -466,6 +465,7 @@
 				4755538822D45AAC00CC890C /* HomeScreenViewController.m in Sources */,
 				47702E3922D40DC400371A36 /* LoginViewController.m in Sources */,
 				4755538E22D4661100CC890C /* Post.m in Sources */,
+				473BC24522D701370022F7DA /* ProfileFeedViewController.m in Sources */,
 				4755539F22D5B7DA00CC890C /* PostDetailsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

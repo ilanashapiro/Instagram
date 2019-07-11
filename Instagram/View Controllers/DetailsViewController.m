@@ -24,7 +24,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self _updateDetailsView];
+    [self updateDetailsView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -34,8 +34,8 @@
     }
 }
 
-- (void)_updateDetailsView {
-    self.postDetailsView.post = _post;
+- (void)updateDetailsView {
+    self.postDetailsView.post = self.post;
 }
 
 

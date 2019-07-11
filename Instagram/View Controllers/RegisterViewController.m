@@ -9,7 +9,7 @@
 #import "RegisterViewController.h"
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
-#import "StartScreenViewController.h"
+#import "LoginViewController.h"
 
 @interface RegisterViewController ()
 
@@ -74,8 +74,8 @@
 - (IBAction)didTapBack:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    StartScreenViewController *startScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
-    appDelegate.window.rootViewController = startScreeenViewController;
+    LoginViewController *loginScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginScreeenViewController;
 }
 
 - (void)showErrorAlertWithMessage:(NSString *)message {

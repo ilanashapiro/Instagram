@@ -9,14 +9,12 @@
 #import "LoginViewController.h"
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
-#import "StartScreenViewController.h"
 
 @interface LoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 - (IBAction)didTapLogin:(id)sender;
-- (IBAction)didTapBack:(id)sender;
 
 @end
 
@@ -62,13 +60,6 @@
             [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
         }
     }];
-}
-
-- (IBAction)didTapBack:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    StartScreenViewController *startScreeenViewController = [storyboard instantiateViewControllerWithIdentifier:@"StartScreenViewController"];
-    appDelegate.window.rootViewController = startScreeenViewController;
 }
 
 - (void)showErrorAlertWithMessage:(NSString *)message {

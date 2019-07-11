@@ -1,8 +1,8 @@
 //
-//  StartScreenViewController.h
+//  ProfileFeedViewController.h
 //  Instagram
 //
-//  Created by ilanashapiro on 7/8/19.
+//  Created by ilanashapiro on 7/10/19.
 //  Copyright © 2019 ilanashapiro. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StartScreenViewController : UIViewController
+@interface ProfileFeedViewController : UIViewController
 
 @end
 
