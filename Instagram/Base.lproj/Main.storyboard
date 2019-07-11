@@ -155,6 +155,10 @@
                                                         <constraint firstAttribute="width" constant="30" id="Tgc-wX-Dng"/>
                                                     </constraints>
                                                     <state key="normal" image="likeicon"/>
+                                                    <state key="selected" image="likeselected"/>
+                                                    <connections>
+                                                        <action selector="didTapLike:" destination="9Ev-pf-mBP" eventType="touchUpInside" id="hVu-BS-nE0"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VnF-dD-7k0">
                                                     <rect key="frame" x="60" y="250" width="32" height="30"/>
@@ -231,7 +235,7 @@
                                             <outlet property="captionLabel" destination="cWc-75-yjT" id="FpS-TD-kn3"/>
                                             <outlet property="commentButton" destination="VnF-dD-7k0" id="gsG-Ix-wzc"/>
                                             <outlet property="dateLabel" destination="IQ1-vL-DeZ" id="Kpf-M3-PeT"/>
-                                            <outlet property="likeButton" destination="zdR-FK-2PU" id="XcY-Rs-NrE"/>
+                                            <outlet property="likeButton" destination="zdR-FK-2PU" id="Q3m-Ju-Kfe"/>
                                             <outlet property="messageButton" destination="Atw-XL-Gpt" id="L3r-qp-MuF"/>
                                             <outlet property="nameLabel" destination="U5g-6K-Dqz" id="Act-B3-2qT"/>
                                             <outlet property="numberLikesLabel" destination="MGr-xm-ruv" id="85L-1Q-nmF"/>
@@ -328,6 +332,7 @@
                                             <constraint firstAttribute="width" constant="30" id="eoG-zb-4js"/>
                                         </constraints>
                                         <state key="normal" image="likeicon"/>
+                                        <state key="selected" image="favor-icon-red"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxM-ff-2Yf">
                                         <rect key="frame" x="60" y="311" width="29" height="30"/>
@@ -865,13 +870,15 @@
     <resources>
         <image name="bookmark_outline_24" width="24" height="24"/>
         <image name="comment_outline_24" width="24" height="24"/>
+        <image name="favor-icon-red" width="30" height="30"/>
         <image name="instagram" width="2400" height="678"/>
         <image name="likeicon" width="180" height="170"/>
+        <image name="likeselected" width="186" height="160"/>
         <image name="sendicon" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jtC-h0-Gka"/>
-        <segue reference="wTp-SX-Z5w"/>
+        <segue reference="6Xw-BA-CrT"/>
+        <segue reference="LVs-zH-rgg"/>
         <segue reference="G0Z-Md-jj6"/>
     </inferredMetricsTieBreakers>
 </document>
