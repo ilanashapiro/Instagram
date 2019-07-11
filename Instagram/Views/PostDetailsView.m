@@ -7,6 +7,7 @@
 
 #import "PostDetailsView.h"
 #import "Post.h"
+#import "NSDate+DateTools.h"
 
 @interface PostDetailsView ()
 
@@ -24,15 +25,15 @@
 
 - (void)setPost:(Post *)post {
     _post = post;
-    NSLog(@"Post posted!!!!");
+    
     self.postPFImageView.file = post[@"image"];
-    NSLog(@"%@", post[@"image"]);
     [self.postPFImageView loadInBackground];
-    //NSLog(@"%@", self.postPFImageView.file);
+    
     self.nameLabel.text = post.author.username;
-    //NSLog(@"%@ %@", post.author.username, self.nameLabel);
     self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
     self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
+    
+    self.dateLabel.text = [NSString stringWithFormat:@"%@", [post.datePosted shortTimeAgoSinceNow]];
 }
 
 @end

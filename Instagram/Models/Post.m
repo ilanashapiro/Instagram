@@ -8,7 +8,7 @@
 
 #import "Post.h"
 #import <Parse/Parse.h>
-#import "NSDate+DateTools.h"
+
 
 @implementation Post
 
@@ -19,7 +19,7 @@
 @dynamic image;
 @dynamic likeCount;
 @dynamic commentCount;
-@dynamic datePostedString;
+@dynamic datePosted;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -33,16 +33,12 @@
     newPost.caption = caption;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
-    
-    NSDate *date= [NSDate date];
-    
-    newPost.datePosted = [NSString stringWithFormat:@"%@", [date shortTimeAgoSinceNow]];
+    newPost.datePosted = [NSDate date];
     
     [newPost saveInBackgroundWithBlock: completion];
 }
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
-    
     // check if image is not nil
     if (!image) {
         return nil;

@@ -7,6 +7,7 @@
 //
 
 #import "PostCell.h"
+#import "NSDate+DateTools.h"
 
 @interface PostCell()
 
@@ -28,6 +29,8 @@
     //NSLog(@"%@", post.author.username);
     
     self.nameLabel.text = post.author.username;
+    
+    self.dateLabel.text = [NSString stringWithFormat:@"%@", [post.datePosted shortTimeAgoSinceNow]];
     //NSLog(@"%@", self.nameLabel.text, post.author.username);
     self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
     self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
