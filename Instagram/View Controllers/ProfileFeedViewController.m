@@ -12,9 +12,10 @@
 #import "PostCell.h"
 #import "DetailsViewController.h"
 #import "LoginViewController.h"
+#import "ProfilePageViewController.h"
 @import Parse;
 
-@interface ProfileFeedViewController () <DetailsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileFeedViewController () <DetailsViewControllerDelegate, ProfilePageViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 
@@ -43,7 +44,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"segueToDetails"]) {
+    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *post = self.postsArray[indexPath.row];
@@ -51,6 +52,15 @@
         DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
         detailsViewController.post = post;
         detailsViewController.delegate = self;
+        NSLog(@"Tapping on a post!");
+    }
+    else if ([segue.identifier isEqualToString:@"profilePageSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.postsArray[indexPath.row];
+        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
+        profilePageViewController.post = post;
+        profilePageViewController.delegate = self;
         NSLog(@"Tapping on a post!");
     }
 }
@@ -111,8 +121,18 @@
     return self.postsArray.count;
 }
 
-- (void)updateData:(nonnull UIViewController *)viewController {
-    
+- (void)updateDetailsData:(nonnull DetailsViewController *)detailsViewController {
+    Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
+    post.liked = detailsViewController.postDetailsView.post.liked;
+    post.likeCount = detailsViewController.postDetailsView.post.likeCount;
+    [self.tableView reloadData];
+}
+
+- (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
+    for (Post *post in self.postsArray) {
+        post.profileImage = profilePageViewController.post.profileImage;
+    }
+    [self.tableView reloadData];
 }
 
 @end

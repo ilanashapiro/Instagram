@@ -128,6 +128,9 @@
 }
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
+    for (Post *post in self.postsArray) {
+        post.profileImage = profilePageViewController.post.profileImage;
+    }
     [self.tableView reloadData];
 }
 
