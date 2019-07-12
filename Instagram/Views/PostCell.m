@@ -53,12 +53,10 @@
         [post.author[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
             if (!error) {
                 UIImage *image = [UIImage imageWithData:imageData];
-                //NSLog(@"Cell image: %@", image);
                 image = [self resizeImage:image withSize:CGSizeMake(20, 20)];
                 [self.nameButton setImage:image forState:UIControlStateNormal];
                 self.nameButton.imageView.layer.cornerRadius = self.nameButton.imageView.frame.size.width / 2;
                 self.nameButton.imageView.clipsToBounds = YES;
-    //            [self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
             }
             else {
                 NSLog(@"error");

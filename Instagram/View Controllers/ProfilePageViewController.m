@@ -132,7 +132,7 @@
     NSData *imageData = UIImagePNGRepresentation(editedImage);
     PFFileObject *imageFile = [PFFileObject fileObjectWithName:@"image.png" data:imageData];
     
-    PFUser *user = [PFUser currentUser];
+    PFUser *user = self.post.author;
     [user setObject:imageFile forKey:@"profileImage"];
     
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

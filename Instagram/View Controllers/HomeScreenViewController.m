@@ -132,9 +132,11 @@
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
     for (Post *post in self.postsArray) {
-        NSLog(@"post: %@", post);
-        if ([profilePageViewController.post.author objectForKey:@"profileImage"]) {
-            NSLog(@"%@", profilePageViewController.post.author.username);
+        NSString *currentUsername = [NSString stringWithFormat:@"%@", post.author.username];
+        NSString *profileUsername = [NSString stringWithFormat:@"%@", profilePageViewController.post.author.username];
+        
+        if ([profilePageViewController.post.author objectForKey:@"profileImage"] && [currentUsername isEqual:profileUsername]) {
+            NSLog(@"-------------------- %@ %@", post.author[@"profileImage"], profilePageViewController.post.author[@"profileImage"]);
             post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
         }
     }

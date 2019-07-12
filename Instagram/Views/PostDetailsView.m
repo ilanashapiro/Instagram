@@ -32,19 +32,25 @@
     [self.postPFImageView loadInBackground];
     
     [self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
-    [post.author[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-        if (!error) {
-            UIImage *image = [UIImage imageWithData:imageData];
-            image = [self resizeImage:image withSize:CGSizeMake(20, 20)];
-            [self.nameButton setImage:image forState:UIControlStateNormal];
-            self.nameButton.imageView.layer.cornerRadius = self.nameButton.imageView.frame.size.width / 2;
-            self.nameButton.imageView.clipsToBounds = YES;
-            [self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
-        }
-        else {
-            NSLog(@"error");
-        }
-    }];
+    if ([post.author objectForKey:@"profileImage"]) {
+        NSLog(@"username %@", post.author.username);
+        [post.author[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:imageData];
+                image = [self resizeImage:image withSize:CGSizeMake(20, 20)];
+                [self.nameButton setImage:image forState:UIControlStateNormal];
+                self.nameButton.imageView.layer.cornerRadius = self.nameButton.imageView.frame.size.width / 2;
+                self.nameButton.imageView.clipsToBounds = YES;
+            }
+            else {
+                NSLog(@"error");
+            }
+        }];
+    }
+    else {
+        UIImage *defaultImage = [self resizeImage:[UIImage imageNamed:@"emptyprofile"] withSize:CGSizeMake(20, 20)];
+        [self.nameButton setImage:defaultImage forState:UIControlStateNormal];
+    }
     
     if ([post.likeCount intValue] == 1) {
         self.numberLikesLabel.text = [NSString stringWithFormat:@"1 like"];
