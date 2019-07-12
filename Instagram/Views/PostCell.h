@@ -12,6 +12,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PostCellDelegate <NSObject>
+
+- (void)performSegueToProfile:(UITableViewCell *)postCell;
+
+@end
+
 @interface PostCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet PFImageView *postPFImageView;
@@ -25,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *numberLikesLabel;
 
 @property (nonatomic, strong) Post *post;
+@property (nonatomic, strong) NSIndexPath *indexPath;
+@property (nonatomic, weak) id<PostCellDelegate> delegate;
 
 @end
 

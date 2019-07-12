@@ -13,6 +13,9 @@
 @interface PostCell()
 
 - (IBAction)didTapLike:(id)sender;
+- (IBAction)didTapProfile:(id)sender;
+
+
 
 @end
 
@@ -129,6 +132,10 @@
                                          [self.post saveInBackground];
                                      }];
     }
+}
+
+- (IBAction)didTapProfile:(id)sender {
+    [self.delegate performSegueToProfile:self];
 }
 
 @end

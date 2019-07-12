@@ -15,7 +15,7 @@
 
 @import Parse;
 
-@interface HomeScreenViewController () <DetailsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface HomeScreenViewController () <DetailsViewControllerDelegate, PostCellDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 
@@ -50,6 +50,7 @@
         Post *post = self.postsArray[indexPath.row];
         DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
         detailsViewController.post = post;
+        NSLog(@"going to detail post by: %@", post.author.username);
         detailsViewController.postCellIndexPath = indexPath;
         detailsViewController.delegate = self;
         NSLog(@"Tapping on a post!");
@@ -112,6 +113,8 @@
    
     Post *post = self.postsArray[indexPath.row];
     cell.post = post;
+    cell.delegate = self;
+    cell.indexPath = indexPath;
     
     return cell;
 }
@@ -136,6 +139,10 @@
         }
     }
     [self.tableView reloadData];
+}
+
+- (void)performSegueToProfile:(nonnull PostCell *)postCell {
+    [self performSegueWithIdentifier:@"profilePageSegue" sender:postCell];
 }
 
 @end
