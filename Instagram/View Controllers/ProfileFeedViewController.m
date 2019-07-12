@@ -45,6 +45,7 @@
 - (void)receiveNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
         NSLog (@"Successfully received the change tab bar data notification on profile feed!");
+        self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
         [self.tableView reloadData];
     }
     
@@ -146,9 +147,8 @@
         post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
     }
     
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"ChangedTabBarDataNotification"
-     object:self];
+    NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
 }
 
 - (void)performSegueToProfile:(nonnull PostCell *)postCell {
