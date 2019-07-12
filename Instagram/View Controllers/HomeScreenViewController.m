@@ -33,10 +33,22 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotification:)
+                                                 name:@"ChangedTabBarDataNotification"
+                                               object:nil];
+    
     [self fetchPosts];
     [self createRefreshControl];
 }
 
+- (void)receiveNotification:(NSNotification *) notification {
+    if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
+        NSLog (@"Successfully received the change tab bar data notification on home feed!");
+        [self.tableView reloadData];
+    }
+    
+}
 
 #pragma mark - Navigation
 
@@ -136,11 +148,13 @@
         NSString *profileUsername = [NSString stringWithFormat:@"%@", profilePageViewController.post.author.username];
         
         if ([profilePageViewController.post.author objectForKey:@"profileImage"] && [currentUsername isEqual:profileUsername]) {
-            NSLog(@"-------------------- %@ %@", post.author[@"profileImage"], profilePageViewController.post.author[@"profileImage"]);
+            //NSLog(@"-------------------- %@ %@", post.author[@"profileImage"], profilePageViewController.post.author[@"profileImage"]);
             post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
         }
     }
-    [self.tableView reloadData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self];
+
+    
 }
 
 - (void)performSegueToProfile:(nonnull PostCell *)postCell {

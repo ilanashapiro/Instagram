@@ -33,10 +33,22 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotification:)
+                                                 name:@"ChangedTabBarDataNotification"
+                                               object:nil];
+    
     [self fetchPosts];
     [self createRefreshControl];
 }
 
+- (void)receiveNotification:(NSNotification *) notification {
+    if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
+        NSLog (@"Successfully received the change tab bar data notification on profile feed!");
+        [self.tableView reloadData];
+    }
+    
+}
 
 #pragma mark - Navigation
 
@@ -130,9 +142,13 @@
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
     for (Post *post in self.postsArray) {
+        //since all posts are by current user in this tab, all profile pics will be updated
         post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
     }
-    [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"ChangedTabBarDataNotification"
+     object:self];
 }
 
 - (void)performSegueToProfile:(nonnull PostCell *)postCell {

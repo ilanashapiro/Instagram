@@ -67,7 +67,7 @@
         UIImage *defaultImage = [self resizeImage:[UIImage imageNamed:@"emptyprofile"] withSize:CGSizeMake(20, 20)];
         [self.nameButton setImage:defaultImage forState:UIControlStateNormal];
     }
-    self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
+    self.captionLabel.text = [NSString stringWithFormat:@"@%@ %@", post.author.username, post.caption];
     if ([post.liked intValue] == 0) {
         [self.likeButton setSelected:NO];
     }
