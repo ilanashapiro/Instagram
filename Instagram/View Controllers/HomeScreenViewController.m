@@ -128,6 +128,11 @@
     
 }
 
+- (void)notifyLikeUpdates {
+    NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
+}
+
 - (void)performSegueToProfile:(nonnull PostCell *)postCell {
     [self performSegueWithIdentifier:@"profilePageSegue" sender:postCell];
 }
