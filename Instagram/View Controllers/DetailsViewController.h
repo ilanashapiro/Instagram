@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol DetailsViewControllerDelegate <NSObject>
 
-- (void)updateData:(UIViewController *)viewController;
+- (void)updateDetailsData:(UIViewController *)viewController;
 
 @end
 

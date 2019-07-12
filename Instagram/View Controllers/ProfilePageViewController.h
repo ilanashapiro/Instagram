@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ProfilePageViewControllerDelegate <NSObject>
 
-- (void)updateData:(UIViewController *)viewController;
+- (void)updateProfileData:(UIViewController *)viewController;
 
 @end
 

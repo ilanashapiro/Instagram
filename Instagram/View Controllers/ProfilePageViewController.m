@@ -7,7 +7,6 @@
 //
 
 #import "ProfilePageViewController.h"
-#import "ProfilePageView.h"
 @import Parse;
 
 @interface ProfilePageViewController () <UIImagePickerControllerDelegate>
@@ -15,7 +14,9 @@
 - (IBAction)didTapCameraButton:(id)sender;
 - (IBAction)didTapPhotoLibraryButton:(id)sender;
 
-@property (weak, nonatomic) IBOutlet ProfilePageView *profilePageView;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
 
 @end
 
@@ -23,13 +24,48 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadUserData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if ([self isMovingFromParentViewController]) {
+        [self.delegate updateProfileData:self];
+    }
+}
+
+- (void)loadUserData {
+    PFUser *user = [PFUser currentUser];
+    [user[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            NSLog(@"Image is: %@", image);
+            image = [self resizeImage:image withSize:CGSizeMake(500, 500)];
+            self.profileImageView.image = image;
+            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+            self.profileImageView.clipsToBounds = YES;
+        }
+        else {
+            NSLog(@"error");
+        }
+    }];
     
+    self.nameLabel.text = user.username;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    self.profilePageView.post = self.post;
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
-
 /*
 #pragma mark - Navigation
 
@@ -75,7 +111,7 @@
     //editedImage = [self resizeImage:editedImage withSize:<#(CGSize)#>]
     
     // Do something with the images (based on your use case)
-    self.profilePageView.profileImageView.image = editedImage;
+    self.profileImageView.image = editedImage;
     NSData *imageData = UIImagePNGRepresentation(editedImage);
     PFFileObject *imageFile = [PFFileObject fileObjectWithName:@"image.png" data:imageData];
     

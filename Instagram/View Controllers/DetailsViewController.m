@@ -28,7 +28,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if ([self isMovingFromParentViewController]) {
-        [self.delegate updateData:self];
+        [self.delegate updateDetailsData:self];
     }
 }
 

@@ -120,10 +120,14 @@
     return self.postsArray.count;
 }
 
-- (void)updateData:(nonnull DetailsViewController *)detailsViewController {
+- (void)updateDetailsData:(nonnull DetailsViewController *)detailsViewController {
     Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
     post.liked = detailsViewController.postDetailsView.post.liked;
     post.likeCount = detailsViewController.postDetailsView.post.likeCount;
+    [self.tableView reloadData];
+}
+
+- (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
     [self.tableView reloadData];
 }
 
