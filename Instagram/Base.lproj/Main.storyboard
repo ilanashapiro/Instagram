@@ -377,19 +377,20 @@
                                         <state key="normal" title="Button" image="bookmark_outline_24"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owI-Ce-H46">
-                                        <rect key="frame" x="16" y="72" width="126" height="21"/>
+                                        <rect key="frame" x="16" y="72" width="132" height="21"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                         </accessibility>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="fU0-M9-pvO"/>
                                         </constraints>
+                                        <inset key="titleEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="96" maxY="0.0"/>
                                         <state key="normal" title="Jane Doe" image="emptyprofile">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="apf-G9-DCE" kind="show" id="umd-oU-cA9"/>
+                                            <segue destination="apf-G9-DCE" kind="show" identifier="profilePageSegue" id="umd-oU-cA9"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -404,7 +405,7 @@
                                     <constraint firstItem="pRS-KR-SFy" firstAttribute="leading" secondItem="ocj-ns-Q87" secondAttribute="leading" id="Hyl-vM-94H"/>
                                     <constraint firstItem="4qu-dH-qgC" firstAttribute="top" secondItem="pRS-KR-SFy" secondAttribute="bottom" constant="8" id="MpZ-FF-bLy"/>
                                     <constraint firstItem="dxM-ff-2Yf" firstAttribute="top" secondItem="ocj-ns-Q87" secondAttribute="top" id="OEG-LL-83R"/>
-                                    <constraint firstItem="tEj-kO-PLB" firstAttribute="leading" secondItem="owI-Ce-H46" secondAttribute="trailing" constant="139" id="OlC-Nn-Wvm"/>
+                                    <constraint firstItem="tEj-kO-PLB" firstAttribute="leading" secondItem="owI-Ce-H46" secondAttribute="trailing" constant="133" id="OlC-Nn-Wvm"/>
                                     <constraint firstItem="ocj-ns-Q87" firstAttribute="top" secondItem="5NQ-bg-cTr" secondAttribute="bottom" constant="8" id="Ryq-7C-lge"/>
                                     <constraint firstItem="pRS-KR-SFy" firstAttribute="top" secondItem="ocj-ns-Q87" secondAttribute="bottom" constant="8" id="Sw4-dT-j8Q"/>
                                     <constraint firstItem="kJo-Ra-iFs" firstAttribute="leading" secondItem="dxM-ff-2Yf" secondAttribute="trailing" constant="15" id="UdJ-ax-VOS"/>
@@ -599,7 +600,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="1zB-gi-UcX"/>
                     <connections>
+                        <outlet property="cameraButton" destination="S9C-WR-KJn" id="0J3-6c-cWX"/>
+                        <outlet property="changePhotoLabel" destination="HIq-ia-zJQ" id="NZ1-Nn-Loc"/>
                         <outlet property="nameLabel" destination="ANM-9q-4Id" id="EIv-Tt-YPd"/>
+                        <outlet property="photoLibraryButton" destination="Yhl-md-0CV" id="Qpf-sU-vuz"/>
                         <outlet property="profileImageView" destination="B4d-vJ-cJb" id="Nz6-C2-E5l"/>
                     </connections>
                 </viewController>
@@ -994,6 +998,6 @@
         <segue reference="6Xw-BA-CrT"/>
         <segue reference="umd-oU-cA9"/>
         <segue reference="LVs-zH-rgg"/>
-        <segue reference="Y8t-cs-961"/>
+        <segue reference="G0Z-Md-jj6"/>
     </inferredMetricsTieBreakers>
 </document>

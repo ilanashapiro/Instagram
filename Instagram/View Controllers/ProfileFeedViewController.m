@@ -130,7 +130,7 @@
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
     for (Post *post in self.postsArray) {
-        post.profileImage = profilePageViewController.post.profileImage;
+        post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
     }
     [self.tableView reloadData];
 }

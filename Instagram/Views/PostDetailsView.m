@@ -32,7 +32,7 @@
     [self.postPFImageView loadInBackground];
     
     [self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
-    [[PFUser currentUser][@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+    [post.author[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
             UIImage *image = [UIImage imageWithData:imageData];
             image = [self resizeImage:image withSize:CGSizeMake(20, 20)];

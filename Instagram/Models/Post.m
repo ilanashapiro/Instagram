@@ -38,7 +38,6 @@
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.datePosted = [NSDate date];
-    newPost.profileImage = [PFUser currentUser][@"profileImage"];
     
     [newPost saveInBackgroundWithBlock: completion];
 }

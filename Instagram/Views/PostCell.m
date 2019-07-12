@@ -32,7 +32,8 @@
     //NSLog(@"%@", post.author.username);
     
     [self.nameButton setTitle:post.author.username  forState:UIControlStateNormal];
-    NSLog(@"%@", self.nameButton);
+
+    NSLog(@"%@", self.nameButton.titleLabel.text);
     //[self.nameButton setTitle:post.author.username  forState:UIControlStateSelected];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [post.datePosted shortTimeAgoSinceNow]];
@@ -44,20 +45,27 @@
         self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
     }
     
-    [[PFUser currentUser][@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-        if (!error) {
-            UIImage *image = [UIImage imageWithData:imageData];
-            NSLog(@"Cell image: %@", image);
-            image = [self resizeImage:image withSize:CGSizeMake(20, 20)];
-            [self.nameButton setImage:image forState:UIControlStateNormal];
-            self.nameButton.imageView.layer.cornerRadius = self.nameButton.imageView.frame.size.width / 2;
-            self.nameButton.imageView.clipsToBounds = YES;
-            [self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
-        }
-        else {
-            NSLog(@"error");
-        }
-    }];
+    if ([post.author objectForKey:@"profileImage"]) {
+        NSLog(@"username %@", post.author.username);
+        [post.author[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:imageData];
+                //NSLog(@"Cell image: %@", image);
+                image = [self resizeImage:image withSize:CGSizeMake(20, 20)];
+                [self.nameButton setImage:image forState:UIControlStateNormal];
+                self.nameButton.imageView.layer.cornerRadius = self.nameButton.imageView.frame.size.width / 2;
+                self.nameButton.imageView.clipsToBounds = YES;
+    //            [self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
+            }
+            else {
+                NSLog(@"error");
+            }
+        }];
+    }
+    else {
+        UIImage *defaultImage = [self resizeImage:[UIImage imageNamed:@"emptyprofile"] withSize:CGSizeMake(20, 20)];
+        [self.nameButton setImage:defaultImage forState:UIControlStateNormal];
+    }
     self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
     if ([post.liked intValue] == 0) {
         [self.likeButton setSelected:NO];

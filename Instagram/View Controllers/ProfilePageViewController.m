@@ -16,6 +16,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *changePhotoLabel;
+@property (weak, nonatomic) IBOutlet UIButton *photoLibraryButton;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+
 
 
 @end
@@ -25,6 +29,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadUserData];
+    
+    //NSLog(@"%@ %@ %d %@ %@", self.post.author.username,[PFUser currentUser][@"username"], [self.post.author isEqual:[PFUser currentUser]], NSStringFromClass([self.post.author.username class]), NSStringFromClass([[PFUser currentUser][@"username"] class]));
+    
+    NSString *authorName = [NSString stringWithFormat:@"%@", self.post.author.username];
+    NSString *userName = [NSString stringWithFormat:@"%@", [PFUser currentUser][@"username"]];
+    //NSLog(@"%@ %@ %d", authorName, userName, [authorName isEqual:userName]);
+    if (![authorName isEqual:userName]) {
+        [self.changePhotoLabel setHidden:YES];
+        [self.photoLibraryButton setHidden:YES];
+        [self.cameraButton setHidden:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -35,7 +50,8 @@
 }
 
 - (void)loadUserData {
-    PFUser *user = [PFUser currentUser];
+    PFUser *user = self.post.author;
+    NSLog(@"post user is: %@", user.username);
     [user[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
             UIImage *image = [UIImage imageWithData:imageData];
@@ -51,6 +67,7 @@
     }];
     
     self.nameLabel.text = user.username;
+    
 }
 
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {

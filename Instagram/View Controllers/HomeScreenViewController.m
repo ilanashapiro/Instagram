@@ -58,10 +58,11 @@
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *post = self.postsArray[indexPath.row];
-        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
+        NSLog(@"going to user profile: %@", post.author.username);
+        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; 
         profilePageViewController.post = post;
         profilePageViewController.delegate = self;
-        NSLog(@"Tapping on a post!");
+        NSLog(@"Tapping on a profile!");
     }
 }
 
@@ -111,7 +112,6 @@
    
     Post *post = self.postsArray[indexPath.row];
     cell.post = post;
-
     
     return cell;
 }
@@ -129,7 +129,11 @@
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
     for (Post *post in self.postsArray) {
-        post.profileImage = profilePageViewController.post.profileImage;
+        NSLog(@"post: %@", post);
+        if ([profilePageViewController.post.author objectForKey:@"profileImage"]) {
+            NSLog(@"%@", profilePageViewController.post.author.username);
+            post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
+        }
     }
     [self.tableView reloadData];
 }

@@ -34,7 +34,7 @@
 }
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
-    self.post.profileImage = profilePageViewController.post.profileImage;
+    self.post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
     self.postDetailsView.post = self.post;
 }
 
