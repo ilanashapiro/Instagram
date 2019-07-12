@@ -15,7 +15,7 @@
 #import "ProfilePageViewController.h"
 @import Parse;
 
-@interface ProfileFeedViewController () <DetailsViewControllerDelegate, ProfilePageViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileFeedViewController () <DetailsViewControllerDelegate, ProfilePageViewControllerDelegate, PostCellDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 
@@ -133,6 +133,10 @@
         post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
     }
     [self.tableView reloadData];
+}
+
+- (void)performSegueToProfile:(nonnull PostCell *)postCell {
+    [self performSegueWithIdentifier:@"profilePageSegue" sender:postCell];
 }
 
 @end
