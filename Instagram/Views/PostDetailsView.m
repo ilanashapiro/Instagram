@@ -31,7 +31,7 @@
     self.postPFImageView.file = post[@"image"];
     [self.postPFImageView loadInBackground];
     
-    self.nameLabel.text = post.author.username;
+    [self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
     if ([post.likeCount intValue] == 1) {
         self.numberLikesLabel.text = [NSString stringWithFormat:@"1 like"];
     }

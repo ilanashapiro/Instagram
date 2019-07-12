@@ -10,6 +10,8 @@
 		3B99113A2C9860E4AE5B8B7E /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1979E4F382F84D1A4E60E9A /* Pods_Instagram.framework */; };
 		473BC24522D701370022F7DA /* ProfileFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473BC24422D701370022F7DA /* ProfileFeedViewController.m */; };
 		473BC24822D7C13F0022F7DA /* ProfilePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473BC24722D7C13F0022F7DA /* ProfilePageViewController.m */; };
+		473BC24B22D7E2E60022F7DA /* ProfilePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473BC24A22D7E2E60022F7DA /* ProfilePageView.m */; };
+		473BC25422D7EAE50022F7DA /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 473BC25322D7EAE50022F7DA /* User.m */; };
 		4755538822D45AAC00CC890C /* HomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755538622D45AAC00CC890C /* HomeScreenViewController.m */; };
 		4755538E22D4661100CC890C /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755538D22D4661100CC890C /* Post.m */; };
 		4755539122D5372200CC890C /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4755539022D5372200CC890C /* PostViewController.m */; };
@@ -51,6 +53,10 @@
 		473BC24422D701370022F7DA /* ProfileFeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileFeedViewController.m; sourceTree = "<group>"; };
 		473BC24622D7C13F0022F7DA /* ProfilePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilePageViewController.h; sourceTree = "<group>"; };
 		473BC24722D7C13F0022F7DA /* ProfilePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfilePageViewController.m; sourceTree = "<group>"; };
+		473BC24922D7E2E60022F7DA /* ProfilePageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilePageView.h; sourceTree = "<group>"; };
+		473BC24A22D7E2E60022F7DA /* ProfilePageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfilePageView.m; sourceTree = "<group>"; };
+		473BC25222D7EAE50022F7DA /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = User.h; path = /Users/ilanashapiro/Desktop/Instagram/Instagram/Models/User.h; sourceTree = "<absolute>"; };
+		473BC25322D7EAE50022F7DA /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = User.m; path = /Users/ilanashapiro/Desktop/Instagram/Instagram/Models/User.m; sourceTree = "<absolute>"; };
 		4755538622D45AAC00CC890C /* HomeScreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HomeScreenViewController.m; path = "/Users/ilanashapiro/Desktop/Instagram/Instagram/View Controllers/HomeScreenViewController.m"; sourceTree = "<absolute>"; };
 		4755538722D45AAC00CC890C /* HomeScreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HomeScreenViewController.h; path = "/Users/ilanashapiro/Desktop/Instagram/Instagram/View Controllers/HomeScreenViewController.h"; sourceTree = "<absolute>"; };
 		4755538C22D4661100CC890C /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Post.h; path = Instagram/Models/Post.h; sourceTree = SOURCE_ROOT; };
@@ -125,6 +131,8 @@
 			children = (
 				4755538C22D4661100CC890C /* Post.h */,
 				4755538D22D4661100CC890C /* Post.m */,
+				473BC25222D7EAE50022F7DA /* User.h */,
+				473BC25322D7EAE50022F7DA /* User.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,6 +144,8 @@
 				4755539322D5556600CC890C /* PostCell.m */,
 				4755539D22D5B7DA00CC890C /* PostDetailsView.h */,
 				4755539E22D5B7DA00CC890C /* PostDetailsView.m */,
+				473BC24922D7E2E60022F7DA /* ProfilePageView.h */,
+				473BC24A22D7E2E60022F7DA /* ProfilePageView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -469,10 +479,12 @@
 				4755539122D5372200CC890C /* PostViewController.m in Sources */,
 				4755539422D5556600CC890C /* PostCell.m in Sources */,
 				4755538822D45AAC00CC890C /* HomeScreenViewController.m in Sources */,
+				473BC25422D7EAE50022F7DA /* User.m in Sources */,
 				47702E3922D40DC400371A36 /* LoginViewController.m in Sources */,
 				4755538E22D4661100CC890C /* Post.m in Sources */,
 				473BC24522D701370022F7DA /* ProfileFeedViewController.m in Sources */,
 				4755539F22D5B7DA00CC890C /* PostDetailsView.m in Sources */,
+				473BC24B22D7E2E60022F7DA /* ProfilePageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

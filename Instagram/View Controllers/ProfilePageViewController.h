@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ProfilePageViewControllerDelegate <NSObject>
+
+- (void)updateData:(UIViewController *)viewController;
+
+@end
+
 @interface ProfilePageViewController : UIViewController
+
+
+@property (nonatomic, strong) Post *post;
+@property (nonatomic, weak) id<ProfilePageViewControllerDelegate> delegate;
 
 @end
 

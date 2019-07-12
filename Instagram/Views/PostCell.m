@@ -8,6 +8,7 @@
 
 #import "PostCell.h"
 #import "NSDate+DateTools.h"
+@import Parse;
 
 @interface PostCell()
 
@@ -30,7 +31,9 @@
     [self.postPFImageView loadInBackground];
     //NSLog(@"%@", post.author.username);
     
-    self.nameLabel.text = post.author.username;
+    [self.nameButton setTitle:post.author.username  forState:UIControlStateNormal];
+    NSLog(@"%@", self.nameButton);
+    //[self.nameButton setTitle:post.author.username  forState:UIControlStateSelected];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [post.datePosted shortTimeAgoSinceNow]];
     //NSLog(@"%@", self.nameLabel.text, post.author.username);
@@ -40,6 +43,17 @@
     else {
         self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
     }
+    
+//    [post.profileImage getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+//        if (!error) {
+//            UIImage *image = [UIImage imageWithData:imageData];
+//            NSLog(@"%@", image);
+//            [self.nameButton setImage:image forState:UIControlStateNormal]; //post.profileImage
+//        }
+//        else {
+//            NSLog(@"error");
+//        }
+//    }];
     self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
     if ([post.liked intValue] == 0) {
         [self.likeButton setSelected:NO];

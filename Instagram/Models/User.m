@@ -1,44 +1,33 @@
 //
-//  Post.m
-//  Instagram
+//  User.m
+//  
 //
-//  Created by ilanashapiro on 7/8/19.
-//  Copyright © 2019 ilanashapiro. All rights reserved.
+//  Created by ilanashapiro on 7/11/19.
 //
 
-#import "Post.h"
-#import <Parse/Parse.h>
+/*#import "User.h"
 
+@implementation User
 
-@implementation Post
-
-@dynamic postID;
 @dynamic userID;
-@dynamic author;
-@dynamic caption;
-@dynamic image;
-@dynamic likeCount;
-@dynamic commentCount;
-@dynamic datePosted;
-@dynamic liked;
-@dynamic authorBiography;
+@dynamic user;
+@dynamic biography;
+@dynamic profileImage;
 
 + (nonnull NSString *)parseClassName {
-    return @"Post";
+    return @"User";
 }
 
-+ (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) changeProfileImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
-    Post *newPost = [Post new];
+    User *newPost = [User new];
     newPost.image = [self getPFFileFromImage:image];
     newPost.author = [PFUser currentUser];
-//    newPost.authorBiography =
     newPost.caption = caption;
     newPost.liked = @NO;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.datePosted = [NSDate date];
-    newPost.profileImage = [PFUser currentUser][@"profileImage"];
     
     [newPost saveInBackgroundWithBlock: completion];
 }
@@ -59,3 +48,4 @@
 }
 
 @end
+*/

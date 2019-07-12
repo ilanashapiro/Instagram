@@ -11,6 +11,8 @@
 #import "PostCell.h"
 #import "DetailsViewController.h"
 #import "LoginViewController.h"
+#import "ProfilePageViewController.h"
+
 @import Parse;
 
 @interface HomeScreenViewController () <DetailsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -50,6 +52,15 @@
         detailsViewController.post = post;
         detailsViewController.postCellIndexPath = indexPath;
         detailsViewController.delegate = self;
+        NSLog(@"Tapping on a post!");
+    }
+    else if ([segue.identifier isEqualToString:@"profilePageSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.postsArray[indexPath.row];
+        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
+        profilePageViewController.post = post;
+        profilePageViewController.delegate = self;
         NSLog(@"Tapping on a post!");
     }
 }

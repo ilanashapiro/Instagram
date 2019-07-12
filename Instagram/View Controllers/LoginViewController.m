@@ -7,9 +7,8 @@
 //
 
 #import "LoginViewController.h"
-#import "Parse/Parse.h"
 #import "AppDelegate.h"
-
+@import Parse;;
 @interface LoginViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -35,6 +34,21 @@
 }
 */
 
+- (PFFileObject *)getPFFileFromImage:(UIImage * _Nullable)image {
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+}
+
 - (IBAction)didTapLogin:(id)sender {
     if ([self.usernameTextField.text isEqual:@""]) {
         [self showErrorAlertWithMessage:@"Username missing"];
@@ -54,13 +68,27 @@
             NSLog(@"User log in failed: %@", error.localizedDescription);
             [self showErrorAlertWithMessage:error.localizedDescription];
         } else {
-            NSLog(@"User logged in successfully");
+            NSLog(@"image: %@", [UIImage imageNamed:@"Icon-60"]);
+            PFFileObject *imageFile = [self getPFFileFromImage:[UIImage imageNamed:@"Icon-60"]] ;
+            [user setObject:imageFile forKey:@"profileImage"];
             
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (error != nil) {
+                    NSLog(@"User set profile pic login failed: %@", error.localizedDescription);
+                    [self showErrorAlertWithMessage:error.localizedDescription];
+                }
+                else {
+                    NSLog(@"User logged in successfully with profile pic!");
+                    [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
+                }
+            }];
             // display view controller that needs to shown after successful login
-            [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
+            
         }
     }];
 }
+
+
 
 - (void)showErrorAlertWithMessage:(NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"

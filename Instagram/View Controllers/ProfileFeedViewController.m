@@ -79,7 +79,7 @@
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     NSLog(@"%@", [[PFUser currentUser] objectId]);
-    [postQuery whereKey:@"author" equalTo:[[PFUser currentUser] objectId]];
+    [postQuery whereKey:@"author" equalTo:[PFUser currentUser]];
     postQuery.limit = 20;
     
     // fetch data asynchronously

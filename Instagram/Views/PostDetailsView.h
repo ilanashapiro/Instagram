@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PostDetailsView : UIView
 
 @property (weak, nonatomic) IBOutlet PFImageView *postPFImageView;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *nameButton;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
