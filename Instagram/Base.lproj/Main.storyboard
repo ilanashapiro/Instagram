@@ -267,7 +267,7 @@
                                 <action selector="didTapLogout:" destination="Nrj-Tl-qAp" id="wZ0-oG-vxF"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="OeJ-Aq-EIg">
+                        <barButtonItem key="rightBarButtonItem" image="insta_camera_btn" id="OeJ-Aq-EIg">
                             <connections>
                                 <segue destination="5IJ-Is-DxM" kind="presentation" id="6Xw-BA-CrT"/>
                             </connections>
@@ -613,11 +613,11 @@
             </objects>
             <point key="canvasLocation" x="10580" y="-3.1484257871064472"/>
         </scene>
-        <!--Item-->
+        <!--All Posts-->
         <scene sceneID="gya-Do-dkU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ydj-co-9Gj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="RVr-KY-Rtv"/>
+                    <tabBarItem key="tabBarItem" title="All Posts" image="feed_tab" id="RVr-KY-Rtv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="27T-9Z-CoX">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -828,7 +828,7 @@
                                 <action selector="didTapLogout:" destination="j1b-Vq-WPd" id="IwH-fl-A7r"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="0QD-ma-6ax">
+                        <barButtonItem key="rightBarButtonItem" image="insta_camera_btn" id="0QD-ma-6ax">
                             <connections>
                                 <segue destination="5IJ-Is-DxM" kind="presentation" id="jtC-h0-Gka"/>
                             </connections>
@@ -842,11 +842,11 @@
             </objects>
             <point key="canvasLocation" x="5384.8000000000002" y="-1093.4032983508246"/>
         </scene>
-        <!--Item-->
+        <!--Your Posts-->
         <scene sceneID="1Yx-uK-3pj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5eY-j9-wRI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="EIG-IW-InE"/>
+                    <tabBarItem key="tabBarItem" title="Your Posts" image="profile_tab" id="EIG-IW-InE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mhi-Os-QF6">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -991,14 +991,17 @@
         <image name="bookmark_outline_24" width="24" height="24"/>
         <image name="comment_outline_24" width="24" height="24"/>
         <image name="emptyprofile" width="344" height="343"/>
+        <image name="feed_tab" width="25" height="25"/>
+        <image name="insta_camera_btn" width="25" height="25"/>
         <image name="instagram" width="2400" height="678"/>
         <image name="likeicon" width="180" height="170"/>
         <image name="likeselected" width="186" height="160"/>
+        <image name="profile_tab" width="25" height="25"/>
         <image name="sendicon" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6Xw-BA-CrT"/>
-        <segue reference="5PX-Yc-Afx"/>
+        <segue reference="umd-oU-cA9"/>
         <segue reference="LVs-zH-rgg"/>
         <segue reference="G0Z-Md-jj6"/>
     </inferredMetricsTieBreakers>

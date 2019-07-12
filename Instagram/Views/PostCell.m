@@ -29,18 +29,13 @@
 - (void)setPost:(Post *)post {
     _post = post;
     
-    //NSLog(@"%@", self.postPFImageView.file);
     self.postPFImageView.file = post[@"image"];
     [self.postPFImageView loadInBackground];
-    //NSLog(@"%@", post.author.username);
     
     [self.nameButton setTitle:post.author.username  forState:UIControlStateNormal];
-
-    NSLog(@"%@", self.nameButton.titleLabel.text);
-    //[self.nameButton setTitle:post.author.username  forState:UIControlStateSelected];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [post.datePosted shortTimeAgoSinceNow]];
-    //NSLog(@"%@", self.nameLabel.text, post.author.username);
+
     if ([post.likeCount intValue] == 1) {
         self.numberLikesLabel.text = [NSString stringWithFormat:@"1 like"];
     }
@@ -49,7 +44,6 @@
     }
     
     if ([post.author objectForKey:@"profileImage"]) {
-        NSLog(@"username %@", post.author.username);
         [post.author[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
             if (!error) {
                 UIImage *image = [UIImage imageWithData:imageData];
@@ -97,38 +91,55 @@
 }
 
 - (IBAction)didTapLike:(id)sender {
-    //Update the local model (tweet) properties to reflect it’s been favorited by updating the favorited bool and incrementing the favoriteCount.
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     NSLog(@"Tapped like!");
     if ([self.post.liked intValue] == 0) {
         // Retrieve the object by id
-        [query getObjectInBackgroundWithId:self.post.objectId
-                                     block:^(PFObject *Post, NSError *error) {
-                                         // Now let's update it with some new data. In this case, only cheatMode and score
-                                         // will get sent to the cloud. playerName hasn't changed.
-                                         self.post[@"liked"] = @YES;
-                                         int likeCountInt = [self.post.likeCount intValue];
-                                         NSNumber *likeCountNumber = [NSNumber numberWithInt:likeCountInt + 1];
-                                         [self.likeButton setSelected:YES];
-                                         self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", likeCountNumber];
-                                         self.post[@"likeCount"] = likeCountNumber;
-                                         [self.post saveInBackground];
-                                     }];
+        [query getObjectInBackgroundWithId:self.post.objectId block:^(PFObject *Post, NSError *error) {
+            if (!error) {
+                 self.post[@"liked"] = @YES;
+                 int likeCountInt = [self.post.likeCount intValue];
+                 NSNumber *likeCountNumber = [NSNumber numberWithInt:likeCountInt + 1];
+                 self.post[@"likeCount"] = likeCountNumber;
+                
+                 [self.likeButton setSelected:YES];
+                 if ([self.post.likeCount intValue] == 1) {
+                     self.numberLikesLabel.text = [NSString stringWithFormat:@"1 like"];
+                 }
+                 else {
+                     self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", self.post.likeCount];
+                 }
+                
+                 [self.post saveInBackground];
+            }
+            else {
+                NSLog(@"error");
+            }
+         }];
     }
     else {
         // Retrieve the object by id
-        [query getObjectInBackgroundWithId:self.post.objectId
-                                     block:^(PFObject *Post, NSError *error) {
-                                         // Now let's update it with some new data. In this case, only cheatMode and score
-                                         // will get sent to the cloud. playerName hasn't changed.
-                                         self.post[@"liked"] = @NO;
-                                         int likeCountInt = [self.post.likeCount intValue];
-                                         NSNumber *likeCountNumber = [NSNumber numberWithInt:likeCountInt - 1];
-                                         [self.likeButton setSelected:NO];
-                                         self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", likeCountNumber];
-                                         self.post[@"likeCount"] = likeCountNumber;
-                                         [self.post saveInBackground];
-                                     }];
+        [query getObjectInBackgroundWithId:self.post.objectId block:^(PFObject *Post, NSError *error) {
+            if (!error) {
+                 self.post[@"liked"] = @NO;
+                 int likeCountInt = [self.post.likeCount intValue];
+                 NSNumber *likeCountNumber = [NSNumber numberWithInt:likeCountInt - 1];
+                 [self.likeButton setSelected:NO];
+                 self.post[@"likeCount"] = likeCountNumber;
+                
+                 if ([self.post.likeCount intValue] == 1) {
+                     self.numberLikesLabel.text = [NSString stringWithFormat:@"1 like"];
+                 }
+                 else {
+                     self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", self.post.likeCount];
+                 }
+                
+                 [self.post saveInBackground];
+            }
+            else {
+                NSLog(@"Error");
+            }
+         }];
     }
 }
 

@@ -24,16 +24,6 @@
     // Do any additional setup after loading the view.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (PFFileObject *)getPFFileFromImage:(UIImage * _Nullable)image {
     // check if image is not nil
     if (!image) {
@@ -69,14 +59,12 @@
             [self showErrorAlertWithMessage:error.localizedDescription];
         } else {
             NSLog(@"User logged in successfully");
-            [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
-            // display view controller that needs to shown after successful login
             
+            // display view controller that needs to shown after successful login
+            [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
         }
     }];
 }
-
-
 
 - (void)showErrorAlertWithMessage:(NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
@@ -93,6 +81,5 @@
         // optional code for what happens after the alert controller has finished presenting
     }];
 }
-
 
 @end

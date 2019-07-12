@@ -28,11 +28,9 @@
 }
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion {
-    
     Post *newPost = [Post new];
     newPost.image = [self getPFFileFromImage:image];
     newPost.author = [PFUser currentUser];
-//    newPost.authorBiography =
     newPost.caption = caption;
     newPost.liked = @NO;
     newPost.likeCount = @(0);

@@ -51,36 +51,6 @@
     
 }
 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
-        UITableViewCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        Post *post = self.postsArray[indexPath.row];
-        DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
-        detailsViewController.post = post;
-        NSLog(@"going to detail post by: %@", post.author.username);
-        detailsViewController.postCellIndexPath = indexPath;
-        detailsViewController.delegate = self;
-        NSLog(@"Tapping on a post!");
-    }
-    else if ([segue.identifier isEqualToString:@"profilePageSegue"]) {
-        UITableViewCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        Post *post = self.postsArray[indexPath.row];
-        NSLog(@"going to user profile: %@", post.author.username);
-        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; 
-        profilePageViewController.post = post;
-        profilePageViewController.delegate = self;
-        NSLog(@"Tapping on a profile!");
-    }
-}
-
-
 - (void)createRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
@@ -149,7 +119,6 @@
         NSString *profileUsername = [NSString stringWithFormat:@"%@", profilePageViewController.post.author.username];
         
         if ([profilePageViewController.post.author objectForKey:@"profileImage"] && [currentUsername isEqual:profileUsername]) {
-            //NSLog(@"-------------------- %@ %@", post.author[@"profileImage"], profilePageViewController.post.author[@"profileImage"]);
             post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
         }
     }
@@ -161,6 +130,33 @@
 
 - (void)performSegueToProfile:(nonnull PostCell *)postCell {
     [self performSegueWithIdentifier:@"profilePageSegue" sender:postCell];
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.postsArray[indexPath.row];
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.post = post;
+        detailsViewController.postCellIndexPath = indexPath;
+        detailsViewController.delegate = self;
+        NSLog(@"Tapping on a post by: %@", post.author.username);
+    }
+    else if ([segue.identifier isEqualToString:@"profilePageSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.postsArray[indexPath.row];
+        ProfilePageViewController *profilePageViewController = [segue destinationViewController];
+        profilePageViewController.post = post;
+        profilePageViewController.delegate = self;
+        NSLog(@"Tapping on user profile: %@", post.author.username);
+    }
 }
 
 @end

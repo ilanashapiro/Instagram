@@ -31,15 +31,15 @@
     [self loadUserData];
     
     self.bioTextField.delegate = self;
-    //NSLog(@"%@ %@ %d %@ %@", self.post.author.username,[PFUser currentUser][@"username"], [self.post.author isEqual:[PFUser currentUser]], NSStringFromClass([self.post.author.username class]), NSStringFromClass([[PFUser currentUser][@"username"] class]));
     
     NSString *authorName = [NSString stringWithFormat:@"%@", self.post.author.username];
     NSString *userName = [NSString stringWithFormat:@"%@", [PFUser currentUser][@"username"]];
-    //NSLog(@"%@ %@ %d", authorName, userName, [authorName isEqual:userName]);
+
     if (![authorName isEqual:userName]) {
         [self.changePhotoLabel setHidden:YES];
         [self.photoLibraryButton setHidden:YES];
         [self.cameraButton setHidden:YES];
+        [self.bioTextField setEditable:NO];
     }
 }
 
@@ -66,12 +66,11 @@
 
 - (void)loadUserData {
     PFUser *user = self.post.author;
-    //NSLog(@"post user is: %@", user.username);
+    
     if ([user objectForKey:@"profileImage"]) {
         [user[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
             if (!error) {
                 UIImage *image = [UIImage imageWithData:imageData];
-                NSLog(@"Image is: %@", image);
                 image = [self resizeImage:image withSize:CGSizeMake(500, 500)];
                 self.profileImageView.image = image;
                 self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
@@ -125,8 +124,6 @@
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
-    
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
@@ -134,6 +131,8 @@
         NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
+    
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
 - (IBAction)didTapPhotoLibraryButton:(id)sender {
@@ -197,21 +196,3 @@
 }
 
 @end
-
-
-
-/*
- PFFileObject *imageFile = [self getPFFileFromImage:[UIImage imageNamed:@"Icon-60"]] ;
- [user setObject:imageFile forKey:@"profileImage"];
- 
- [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
- if (error != nil) {
- NSLog(@"User set profile pic login failed: %@", error.localizedDescription);
- [self showErrorAlertWithMessage:error.localizedDescription];
- }
- else {
- NSLog(@"User logged in successfully with profile pic!");
- [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
- }
- }];
- */

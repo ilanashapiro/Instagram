@@ -34,9 +34,9 @@
     self.tableView.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(receiveNotification:)
-                                                 name:@"ChangedTabBarDataNotification"
-                                               object:nil];
+                                          selector:@selector(receiveNotification:)
+                                          name:@"ChangedTabBarDataNotification"
+                                          object:nil];
     
     [self fetchPosts];
     [self createRefreshControl];
@@ -49,33 +49,6 @@
         [self.tableView reloadData];
     }
     
-}
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
-        UITableViewCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        Post *post = self.postsArray[indexPath.row];
-        
-        DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
-        detailsViewController.post = post;
-        detailsViewController.delegate = self;
-        NSLog(@"Tapping on a post!");
-    }
-    else if ([segue.identifier isEqualToString:@"profilePageSegue"]) {
-        UITableViewCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        Post *post = self.postsArray[indexPath.row];
-        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
-        profilePageViewController.post = post;
-        profilePageViewController.delegate = self;
-        NSLog(@"Tapping on a post!");
-    }
 }
 
 - (void)createRefreshControl {
@@ -101,7 +74,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    NSLog(@"%@", [[PFUser currentUser] objectId]);
+    
     [postQuery whereKey:@"author" equalTo:[PFUser currentUser]];
     postQuery.limit = 20;
     
@@ -125,7 +98,6 @@
     
     Post *post = self.postsArray[indexPath.row];
     cell.post = post;
-    
     
     return cell;
 }
@@ -153,6 +125,33 @@
 
 - (void)performSegueToProfile:(nonnull PostCell *)postCell {
     [self performSegueWithIdentifier:@"profilePageSegue" sender:postCell];
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.postsArray[indexPath.row];
+        
+        DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
+        detailsViewController.post = post;
+        detailsViewController.delegate = self;
+        NSLog(@"Tapping on a post!");
+    }
+    else if ([segue.identifier isEqualToString:@"profilePageSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.postsArray[indexPath.row];
+        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
+        profilePageViewController.post = post;
+        profilePageViewController.delegate = self;
+        NSLog(@"Tapping on a username to go to profile!");
+    }
 }
 
 @end

@@ -18,8 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //[self.view layoutIfNeeded]; (don't use now) -- this line lays out the views, what happens in between segue and view completely loading
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,7 +43,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"profilePageSegue"]) {
-        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
+        ProfilePageViewController *profilePageViewController = [segue destinationViewController];
         profilePageViewController.post = self.post;
         profilePageViewController.delegate = self;
         NSLog(@"Tapping on a details post!");
