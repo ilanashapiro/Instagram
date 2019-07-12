@@ -9,7 +9,7 @@
 #import "ProfilePageViewController.h"
 @import Parse;
 
-@interface ProfilePageViewController () <UIImagePickerControllerDelegate>
+@interface ProfilePageViewController () <UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 - (IBAction)didTapCameraButton:(id)sender;
 - (IBAction)didTapPhotoLibraryButton:(id)sender;
@@ -19,8 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *changePhotoLabel;
 @property (weak, nonatomic) IBOutlet UIButton *photoLibraryButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
-
-
+@property (weak, nonatomic) IBOutlet UITextView *bioTextField;
+@property (nonatomic) BOOL bioWasEdited;
 
 @end
 
@@ -30,6 +30,7 @@
     [super viewDidLoad];
     [self loadUserData];
     
+    self.bioTextField.delegate = self;
     //NSLog(@"%@ %@ %d %@ %@", self.post.author.username,[PFUser currentUser][@"username"], [self.post.author isEqual:[PFUser currentUser]], NSStringFromClass([self.post.author.username class]), NSStringFromClass([[PFUser currentUser][@"username"] class]));
     
     NSString *authorName = [NSString stringWithFormat:@"%@", self.post.author.username];
@@ -45,26 +46,52 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if ([self isMovingFromParentViewController]) {
+        if (self.bioWasEdited) {
+            PFUser *user = self.post.author;
+            [user setObject:self.bioTextField.text forKey:@"bioText"];
+            
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (error != nil) {
+                    NSLog(@"User set bio failed: %@", error.localizedDescription);
+                    [self showErrorAlertWithMessage:error.localizedDescription];
+                }
+                else {
+                    NSLog(@"User successfully changed bio!");
+                }
+            }];
+        }
         [self.delegate updateProfileData:self];
     }
 }
 
 - (void)loadUserData {
     PFUser *user = self.post.author;
-    NSLog(@"post user is: %@", user.username);
-    [user[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-        if (!error) {
-            UIImage *image = [UIImage imageWithData:imageData];
-            NSLog(@"Image is: %@", image);
-            image = [self resizeImage:image withSize:CGSizeMake(500, 500)];
-            self.profileImageView.image = image;
-            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-            self.profileImageView.clipsToBounds = YES;
-        }
-        else {
-            NSLog(@"error");
-        }
-    }];
+    //NSLog(@"post user is: %@", user.username);
+    if ([user objectForKey:@"profileImage"]) {
+        [user[@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:imageData];
+                NSLog(@"Image is: %@", image);
+                image = [self resizeImage:image withSize:CGSizeMake(500, 500)];
+                self.profileImageView.image = image;
+                self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+                self.profileImageView.clipsToBounds = YES;
+            }
+            else {
+                NSLog(@"error");
+            }
+        }];
+    }
+    else {
+        UIImage *defaultImage = [self resizeImage:[UIImage imageNamed:@"emptyprofile"] withSize:CGSizeMake(20, 20)];
+        self.profileImageView.image = defaultImage;
+        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+        self.profileImageView.clipsToBounds = YES;
+    }
+    
+    if ([user objectForKey:@"bioText"]) {
+        self.bioTextField.text = user[@"bioText"];
+    }
     
     self.nameLabel.text = user.username;
     
@@ -163,6 +190,10 @@
     [self presentViewController:alert animated:YES completion:^{
         // optional code for what happens after the alert controller has finished presenting
     }];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    self.bioWasEdited = YES;
 }
 
 @end

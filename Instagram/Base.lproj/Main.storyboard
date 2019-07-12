@@ -601,6 +601,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="1zB-gi-UcX"/>
                     <connections>
+                        <outlet property="bioTextField" destination="Ye3-ap-jJf" id="SLO-UZ-5uM"/>
                         <outlet property="cameraButton" destination="S9C-WR-KJn" id="0J3-6c-cWX"/>
                         <outlet property="changePhotoLabel" destination="HIq-ia-zJQ" id="NZ1-Nn-Loc"/>
                         <outlet property="nameLabel" destination="ANM-9q-4Id" id="EIv-Tt-YPd"/>
