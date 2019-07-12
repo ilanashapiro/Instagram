@@ -68,20 +68,8 @@
             NSLog(@"User log in failed: %@", error.localizedDescription);
             [self showErrorAlertWithMessage:error.localizedDescription];
         } else {
-            NSLog(@"image: %@", [UIImage imageNamed:@"Icon-60"]);
-            PFFileObject *imageFile = [self getPFFileFromImage:[UIImage imageNamed:@"Icon-60"]] ;
-            [user setObject:imageFile forKey:@"profileImage"];
-            
-            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (error != nil) {
-                    NSLog(@"User set profile pic login failed: %@", error.localizedDescription);
-                    [self showErrorAlertWithMessage:error.localizedDescription];
-                }
-                else {
-                    NSLog(@"User logged in successfully with profile pic!");
-                    [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
-                }
-            }];
+            NSLog(@"User logged in successfully");
+            [self performSegueWithIdentifier:@"homeScreenSegue" sender:nil];
             // display view controller that needs to shown after successful login
             
         }

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ProfilePageView : UIView
 
 @property (nonatomic, strong) Post *post;
-@property (nonatomic, weak) IBOutlet PFImageView *profilePFImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *profileImageView;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 
 @end

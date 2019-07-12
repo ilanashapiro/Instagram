@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfilePageViewController : UIViewController
 
-
 @property (nonatomic, strong) Post *post;
 @property (nonatomic, weak) id<ProfilePageViewControllerDelegate> delegate;
 

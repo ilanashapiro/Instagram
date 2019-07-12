@@ -190,13 +190,18 @@
                                                     </constraints>
                                                     <state key="normal" title="Button" image="bookmark_outline_24"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpG-kM-QyO">
-                                                    <rect key="frame" x="16" y="0.0" width="72" height="21"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpG-kM-QyO">
+                                                    <rect key="frame" x="16" y="0.0" width="120" height="21"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <accessibilityTraits key="traits" button="YES" staticText="YES"/>
+                                                    </accessibility>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Ssi-qm-VGq"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="Jane Doe"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="96" maxY="0.0"/>
+                                                    <state key="normal" title="Jane Doe" image="emptyprofile">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
                                                     <connections>
                                                         <segue destination="apf-G9-DCE" kind="show" identifier="profilePageSegue" id="iKa-Vp-Py0"/>
                                                     </connections>
@@ -210,7 +215,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="IQ1-vL-DeZ" secondAttribute="trailing" constant="16" id="DzM-ll-pI2"/>
                                                 <constraint firstAttribute="trailing" secondItem="rP0-r8-j3j" secondAttribute="trailing" id="Gqh-4X-gf7"/>
                                                 <constraint firstItem="HpG-kM-QyO" firstAttribute="leading" secondItem="eIV-ym-4q5" secondAttribute="leading" constant="16" id="Idu-JH-jmD"/>
-                                                <constraint firstItem="IQ1-vL-DeZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HpG-kM-QyO" secondAttribute="trailing" constant="10" id="PRh-Ul-Qgm"/>
+                                                <constraint firstItem="IQ1-vL-DeZ" firstAttribute="leading" secondItem="HpG-kM-QyO" secondAttribute="trailing" constant="139" id="PRh-Ul-Qgm"/>
                                                 <constraint firstItem="Atw-XL-Gpt" firstAttribute="top" secondItem="rP0-r8-j3j" secondAttribute="bottom" constant="8" id="Qpa-Ki-2jD"/>
                                                 <constraint firstItem="rP0-r8-j3j" firstAttribute="leading" secondItem="eIV-ym-4q5" secondAttribute="leading" id="SaB-2m-6cH"/>
                                                 <constraint firstAttribute="trailing" secondItem="huv-jb-LCN" secondAttribute="trailing" constant="10" id="Tbd-Ci-6mm"/>
@@ -520,7 +525,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06p-KM-Vau" customClass="ProfilePageView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyprofile" translatesAutoresizingMaskIntoConstraints="NO" id="B4d-vJ-cJb" customClass="PFImageView">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyprofile" translatesAutoresizingMaskIntoConstraints="NO" id="B4d-vJ-cJb">
                                         <rect key="frame" x="16" y="80" width="170" height="170"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="Lo6-n6-Mb9"/>
@@ -534,26 +539,37 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jane Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANM-9q-4Id">
-                                        <rect key="frame" x="194" y="80" width="72" height="21"/>
+                                        <rect key="frame" x="194" y="80" width="74.5" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="mdv-jD-q4I"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S9C-WR-KJn">
-                                        <rect key="frame" x="194" y="162" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change profile photo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HIq-ia-zJQ">
-                                        <rect key="frame" x="194" y="109" width="166" height="21"/>
+                                        <rect key="frame" x="194" y="115" width="166" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhl-md-0CV">
+                                        <rect key="frame" x="232" y="160" width="92" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Photo Library"/>
+                                        <connections>
+                                            <action selector="didTapPhotoLibraryButton:" destination="apf-G9-DCE" eventType="touchUpInside" id="57o-5c-ju1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S9C-WR-KJn">
+                                        <rect key="frame" x="250" y="138" width="54" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Camera"/>
+                                        <connections>
+                                            <action selector="didTapCameraButton:" destination="apf-G9-DCE" eventType="touchUpInside" id="bdF-6v-zaX"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -569,7 +585,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="nameLabel" destination="ANM-9q-4Id" id="FrN-kc-71g"/>
-                                    <outlet property="profilePFImageView" destination="B4d-vJ-cJb" id="gX6-Ky-UMy"/>
+                                    <outlet property="profileImageView" destination="B4d-vJ-cJb" id="48A-Wq-9QI"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -583,6 +599,9 @@
                         <viewLayoutGuide key="safeArea" id="Lcf-ym-w3O"/>
                     </view>
                     <navigationItem key="navigationItem" id="1zB-gi-UcX"/>
+                    <connections>
+                        <outlet property="profilePageView" destination="06p-KM-Vau" id="5Qy-Md-MbL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWK-Il-shZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

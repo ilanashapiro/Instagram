@@ -22,10 +22,33 @@
 - (void)setPost:(Post *)post {
     _post = post;
     
-    self.profilePFImageView.file = post[@"image"];
-    [self.profilePFImageView loadInBackground];
+    [[PFUser currentUser][@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            NSLog(@"Image is: %@", image);
+            image = [self resizeImage:image withSize:CGSizeMake(500, 500)];
+            self.profileImageView.image = image;
+            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+            self.profileImageView.clipsToBounds = YES;
+        }
+        else {
+            NSLog(@"error");
+        }
+    }];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
-    //[self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 @end

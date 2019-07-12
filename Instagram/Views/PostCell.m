@@ -44,16 +44,20 @@
         self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
     }
     
-//    [post.profileImage getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-//        if (!error) {
-//            UIImage *image = [UIImage imageWithData:imageData];
-//            NSLog(@"%@", image);
-//            [self.nameButton setImage:image forState:UIControlStateNormal]; //post.profileImage
-//        }
-//        else {
-//            NSLog(@"error");
-//        }
-//    }];
+    [[PFUser currentUser][@"profileImage"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        if (!error) {
+            UIImage *image = [UIImage imageWithData:imageData];
+            NSLog(@"Cell image: %@", image);
+            image = [self resizeImage:image withSize:CGSizeMake(20, 20)];
+            [self.nameButton setImage:image forState:UIControlStateNormal];
+            self.nameButton.imageView.layer.cornerRadius = self.nameButton.imageView.frame.size.width / 2;
+            self.nameButton.imageView.clipsToBounds = YES;
+            [self.nameButton setTitle:post.author.username forState:UIControlStateNormal];
+        }
+        else {
+            NSLog(@"error");
+        }
+    }];
     self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
     if ([post.liked intValue] == 0) {
         [self.likeButton setSelected:NO];
@@ -61,6 +65,20 @@
     else {
         [self.likeButton setSelected:YES];
     }
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
