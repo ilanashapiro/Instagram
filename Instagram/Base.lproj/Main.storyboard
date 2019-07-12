@@ -377,7 +377,7 @@
                                         <state key="normal" title="Button" image="bookmark_outline_24"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owI-Ce-H46">
-                                        <rect key="frame" x="16" y="72" width="134" height="21"/>
+                                        <rect key="frame" x="16" y="72" width="126" height="21"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                         </accessibility>
@@ -388,6 +388,9 @@
                                         <state key="normal" title="Jane Doe" image="emptyprofile">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="apf-G9-DCE" kind="show" id="umd-oU-cA9"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -401,7 +404,7 @@
                                     <constraint firstItem="pRS-KR-SFy" firstAttribute="leading" secondItem="ocj-ns-Q87" secondAttribute="leading" id="Hyl-vM-94H"/>
                                     <constraint firstItem="4qu-dH-qgC" firstAttribute="top" secondItem="pRS-KR-SFy" secondAttribute="bottom" constant="8" id="MpZ-FF-bLy"/>
                                     <constraint firstItem="dxM-ff-2Yf" firstAttribute="top" secondItem="ocj-ns-Q87" secondAttribute="top" id="OEG-LL-83R"/>
-                                    <constraint firstItem="tEj-kO-PLB" firstAttribute="leading" secondItem="owI-Ce-H46" secondAttribute="trailing" constant="131" id="OlC-Nn-Wvm"/>
+                                    <constraint firstItem="tEj-kO-PLB" firstAttribute="leading" secondItem="owI-Ce-H46" secondAttribute="trailing" constant="139" id="OlC-Nn-Wvm"/>
                                     <constraint firstItem="ocj-ns-Q87" firstAttribute="top" secondItem="5NQ-bg-cTr" secondAttribute="bottom" constant="8" id="Ryq-7C-lge"/>
                                     <constraint firstItem="pRS-KR-SFy" firstAttribute="top" secondItem="ocj-ns-Q87" secondAttribute="bottom" constant="8" id="Sw4-dT-j8Q"/>
                                     <constraint firstItem="kJo-Ra-iFs" firstAttribute="leading" secondItem="dxM-ff-2Yf" secondAttribute="trailing" constant="15" id="UdJ-ax-VOS"/>
@@ -426,6 +429,7 @@
                                     <outlet property="dateLabel" destination="tEj-kO-PLB" id="aVS-aB-Na5"/>
                                     <outlet property="likeButton" destination="ocj-ns-Q87" id="58Q-ra-E4p"/>
                                     <outlet property="messageButton" destination="kJo-Ra-iFs" id="hxb-Rr-3uj"/>
+                                    <outlet property="nameButton" destination="owI-Ce-H46" id="9zZ-Bo-VoW"/>
                                     <outlet property="numberLikesLabel" destination="pRS-KR-SFy" id="8gc-fc-paU"/>
                                     <outlet property="postPFImageView" destination="5NQ-bg-cTr" id="l7w-Xx-cT7"/>
                                 </connections>
@@ -540,7 +544,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jane Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANM-9q-4Id">
-                                <rect key="frame" x="212" y="80" width="124" height="37"/>
+                                <rect key="frame" x="211.5" y="80" width="124" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="mdv-jD-q4I"/>
                                 </constraints>
@@ -987,9 +991,9 @@
         <image name="sendicon" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jtC-h0-Gka"/>
-        <segue reference="diw-5L-9yD"/>
-        <segue reference="wTp-SX-Z5w"/>
+        <segue reference="6Xw-BA-CrT"/>
+        <segue reference="umd-oU-cA9"/>
+        <segue reference="LVs-zH-rgg"/>
         <segue reference="Y8t-cs-961"/>
     </inferredMetricsTieBreakers>
 </document>
