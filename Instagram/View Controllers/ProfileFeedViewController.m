@@ -49,14 +49,23 @@
 - (void)receiveNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
         NSLog (@"Successfully received the change tab bar data notification on home feed!");
+        NSArray *newPostsArray = [[notification userInfo] objectForKey:@"postsArray"];
+        NSLog(@"posts array: %@", self.postsArray);
+        if (newPostsArray) {
+            self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
+        }
+        [self.tableView reloadData];
+        
+        
+        
         /*if ([[notification userInfo] objectForKey:@"postsArray"] == nil) {
             //means like occurred in details view
             [self fetchPosts];
         }
-        else {*/
+        else {
             self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
             [self.tableView reloadData];
-        //}
+        }*/
     }
 }
 

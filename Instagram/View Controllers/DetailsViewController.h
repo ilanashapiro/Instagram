@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet PostDetailsView *postDetailsView;
 @property (nonatomic) NSIndexPath *postCellIndexPath;
 @property (nonatomic, weak) id<DetailsViewControllerDelegate> delegate;
+@property (nonatomic) BOOL detailsPostLiked;
 
 @end
 

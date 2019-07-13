@@ -44,7 +44,11 @@
 - (void)receiveNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
         NSLog (@"Successfully received the change tab bar data notification on home feed!");
-        self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
+        NSArray *newPostsArray = [[notification userInfo] objectForKey:@"postsArray"];
+        NSLog(@"posts array: %@", self.postsArray);
+        if (newPostsArray) {
+            self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
+        }
         [self.tableView reloadData];
         /*if (![[notification userInfo] objectForKey:@"postsArray"]) {
             //means like occurred in details view
@@ -125,7 +129,7 @@
     Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
     BOOL detailsPostLiked = [detailsViewController.post.arrayOfUsersWhoLiked containsObject:detailsViewController.post.author.objectId];
     BOOL feedPostLikedBeforeDetails = [post.arrayOfUsersWhoLiked containsObject:post.author.objectId];
-    NSLog(@"details: %d, before details: %d", detailsPostLiked, feedPostLikedBeforeDetails);
+//    NSLog(@"details: %d, before details: %d", detailsPostLiked, feedPostLikedBeforeDetails);
     if (!detailsPostLiked && feedPostLikedBeforeDetails) {
         [post.arrayOfUsersWhoLiked removeObject:post.author.objectId];
     }
@@ -135,7 +139,13 @@
     }
     
     post.likeCount = detailsViewController.postDetailsView.post.likeCount;
-    [self.tableView reloadData];
+    
+    if (detailsViewController.detailsPostLiked) {
+        [self notifyLikeUpdates];
+    }
+    else {
+        [self.tableView reloadData];
+    }
 }
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {

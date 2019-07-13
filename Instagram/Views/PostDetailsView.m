@@ -85,7 +85,6 @@
         else {
             [self setLiked:NO forPost:post user:user];
         }
-        [self.delegate notifyLikeUpdates];
         
     }];
 }
@@ -120,6 +119,10 @@
             [self.likeButton setSelected:liked];
             NSLog(@"Post successfully updated!");
         }
+        
+        self.post.arrayOfUsersWhoLiked = post.arrayOfUsersWhoLiked;
+        self.post.likeCount = post.likeCount;
+        [self.delegate notifyLikeUpdates];
     }];
 }
 

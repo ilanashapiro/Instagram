@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.postDetailsView.delegate = self;
+    self.detailsPostLiked = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -27,10 +28,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if ([self isMovingFromParentViewController]) {
+    /*if ([self isMovingFromParentViewController]) {
         NSLog(@"%d", [self.post.arrayOfUsersWhoLiked containsObject:self.post.author.objectId]);
-        [self.delegate updateDetailsData:self];
-    }
+         [self.delegate updateDetailsData:self];
+        
+    }*/
+    [self.delegate updateDetailsData:self];
 }
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
@@ -40,9 +43,9 @@
 
 - (void)notifyLikeUpdates {
     self.post = self.postDetailsView.post;
-    NSLog(@"details controller post: %@ details view post %@: ", self.postDetailsView.post.objectId, self.post.objectId);
-    NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.post,@"post", self.postCellIndexPath, @"indexPath", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
+    //NSLog(@"details controller post id: %@ details view post id %@: ", self.postDetailsView.post.objectId, self.post.objectId);
+    self.detailsPostLiked = YES;
+    [self.delegate updateDetailsData:self];
 }
 
 #pragma mark - Navigation

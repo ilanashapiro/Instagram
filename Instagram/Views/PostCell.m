@@ -132,9 +132,9 @@
     
     //[self.likeButton setSelected:liked];
     //NSLog(@"post: %@, post id: %@, users liked array: %@", post, post.objectId, post.arrayOfUsersWhoLiked);
-    NSLog(@"post array liked: %@", post.arrayOfUsersWhoLiked);
-    self.post.arrayOfUsersWhoLiked = post.arrayOfUsersWhoLiked;
-    [self.delegate notifyLikeUpdates];
+    
+    //////NSLog(@"post array liked: %@", post.arrayOfUsersWhoLiked);
+    
     
 //    [self.delegate notifyLikeUpdates];
     
@@ -152,7 +152,11 @@
             else {
                 self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
             }
-            self.post.likeCount = post.likeCount; //for the tab bars to update in the notification center
+            
+            self.post.arrayOfUsersWhoLiked = post.arrayOfUsersWhoLiked;
+            self.post.likeCount = post.likeCount;
+            [self.delegate notifyLikeUpdates];//for the tab bars to update in the notification center
+
 //            NSLog(@"like count %d", [post.likeCount intValue]);
 //
 //            NSLog(@"button liked set to: %d", liked);
