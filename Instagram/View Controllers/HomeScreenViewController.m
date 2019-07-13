@@ -12,10 +12,9 @@
 #import "DetailsViewController.h"
 #import "LoginViewController.h"
 #import "ProfilePageViewController.h"
-
 @import Parse;
 
-@interface HomeScreenViewController () <DetailsViewControllerDelegate, PostCellDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface HomeScreenViewController () <DetailsViewControllerDelegate, PostCellDelegate, ProfilePageViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 
@@ -47,8 +46,24 @@
         NSLog (@"Successfully received the change tab bar data notification on home feed!");
         self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
         [self.tableView reloadData];
+        /*if (![[notification userInfo] objectForKey:@"postsArray"]) {
+            //means like occurred in details view
+            NSIndexPath *indexPath = [[notification userInfo] objectForKey:@"indexPath"];
+            
+            NSMutableArray *postsArrayMutable = [self.postsArray mutableCopy];
+            postsArrayMutable[indexPath.row] = [[notification userInfo] objectForKey:@"post"];
+            NSLog(@"row %ld", indexPath.row);
+            self.postsArray = postsArrayMutable;
+            
+            [self.tableView reloadData];
+        }
+        else {
+            NSLog(@"posts before reload array: %@", self.postsArray);
+            self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
+            NSLog(@"posts after reload array: %@", self.postsArray);
+            [self.tableView reloadData];
+        }*/
     }
-    
 }
 
 - (void)createRefreshControl {
@@ -95,8 +110,8 @@
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
    
     Post *post = self.postsArray[indexPath.row];
-    cell.post = post;
     cell.delegate = self;
+    cell.post = post;
     cell.indexPath = indexPath;
     
     return cell;
@@ -108,7 +123,17 @@
 
 - (void)updateDetailsData:(nonnull DetailsViewController *)detailsViewController {
     Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
-    post.liked = detailsViewController.postDetailsView.post.liked;
+    BOOL detailsPostLiked = [detailsViewController.post.arrayOfUsersWhoLiked containsObject:detailsViewController.post.author.objectId];
+    BOOL feedPostLikedBeforeDetails = [post.arrayOfUsersWhoLiked containsObject:post.author.objectId];
+    NSLog(@"details: %d, before details: %d", detailsPostLiked, feedPostLikedBeforeDetails);
+    if (!detailsPostLiked && feedPostLikedBeforeDetails) {
+        [post.arrayOfUsersWhoLiked removeObject:post.author.objectId];
+    }
+    else if (detailsPostLiked && !feedPostLikedBeforeDetails)
+    {
+        [post.arrayOfUsersWhoLiked addObject:post.author.objectId];
+    }
+    
     post.likeCount = detailsViewController.postDetailsView.post.likeCount;
     [self.tableView reloadData];
 }
@@ -124,11 +149,16 @@
     }
     NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
-
-    
 }
 
 - (void)notifyLikeUpdates {
+//    NSLog(@"notify of post cell array liked: %@", postCell.post.arrayOfUsersWhoLiked);
+//    NSMutableArray *postsArrayMutable = [self.postsArray mutableCopy];
+//    postsArrayMutable[postCell.indexPath.row] = postCell.post;
+//    self.postsArray = postsArrayMutable;
+    
+    //NSLog(@"post that was changed%@", self.postsArray[postCell.indexPath.row]);
+    
     NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
 }
@@ -150,6 +180,7 @@
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.post = post;
         detailsViewController.postCellIndexPath = indexPath;
+        NSLog(@"initial row: %ld", indexPath.row);
         detailsViewController.delegate = self;
         NSLog(@"Tapping on a post by: %@", post.author.username);
     }

@@ -42,13 +42,22 @@
     [self createRefreshControl];
 }
 
+/*- (void)viewWillAppear:(BOOL)animated {
+    [self fetchPosts];
+}*/
+
 - (void)receiveNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
-        NSLog (@"Successfully received the change tab bar data notification on profile feed!");
-        self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
-        [self.tableView reloadData];
+        NSLog (@"Successfully received the change tab bar data notification on home feed!");
+        /*if ([[notification userInfo] objectForKey:@"postsArray"] == nil) {
+            //means like occurred in details view
+            [self fetchPosts];
+        }
+        else {*/
+            self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
+            [self.tableView reloadData];
+        //}
     }
-    
 }
 
 - (void)createRefreshControl {
@@ -74,7 +83,6 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    
     [postQuery whereKey:@"author" equalTo:[PFUser currentUser]];
     postQuery.limit = 20;
     
@@ -97,7 +105,9 @@
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
     
     Post *post = self.postsArray[indexPath.row];
+    cell.delegate = self;
     cell.post = post;
+    cell.indexPath = indexPath;
     
     return cell;
 }
@@ -107,10 +117,24 @@
 }
 
 - (void)updateDetailsData:(nonnull DetailsViewController *)detailsViewController {
-    Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
+    /*Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
     post.liked = detailsViewController.postDetailsView.post.liked;
     post.likeCount = detailsViewController.postDetailsView.post.likeCount;
+    [self.tableView reloadData];*/
+    Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
+    BOOL detailsPostLiked = [detailsViewController.post.arrayOfUsersWhoLiked containsObject:detailsViewController.post.author.objectId];
+    BOOL feedPostLikedBeforeDetails = [post.arrayOfUsersWhoLiked containsObject:post.author.objectId];
+    if (!detailsPostLiked && feedPostLikedBeforeDetails) {
+        [post.arrayOfUsersWhoLiked removeObject:post.author.objectId];
+    }
+    else if (detailsPostLiked && !feedPostLikedBeforeDetails)
+    {
+        [post.arrayOfUsersWhoLiked addObject:post.author.objectId];
+    }
+    
+    post.likeCount = detailsViewController.postDetailsView.post.likeCount;
     [self.tableView reloadData];
+    
 }
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
@@ -119,6 +143,11 @@
         post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
     }
     
+    NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
+}
+
+- (void)notifyLikeUpdates {
     NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
 }
@@ -137,11 +166,10 @@
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *post = self.postsArray[indexPath.row];
-        
         DetailsViewController *detailsViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
         detailsViewController.post = post;
         detailsViewController.delegate = self;
-        NSLog(@"Tapping on a post!");
+        NSLog(@"Tapping on a post by: %@", post.author.username);
     }
     else if ([segue.identifier isEqualToString:@"profilePageSegue"]) {
         UITableViewCell *tappedCell = sender;
@@ -150,7 +178,7 @@
         ProfilePageViewController *profilePageViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
         profilePageViewController.post = post;
         profilePageViewController.delegate = self;
-        NSLog(@"Tapping on a username to go to profile!");
+        NSLog(@"Tapping on user profile by: %@", post.author.username);
     }
 }
 

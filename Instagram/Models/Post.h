@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *likeCount;
 @property (nonatomic, strong) NSNumber *commentCount;
 @property (nonatomic, strong) NSDate *datePosted;
-@property (nonatomic, strong) NSNumber *liked;
+//@property (nonatomic, strong) NSNumber *liked;
 @property (nonatomic, strong) NSMutableArray *arrayOfUsersWhoLiked;
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;

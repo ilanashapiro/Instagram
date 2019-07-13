@@ -11,6 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PostDetailsViewDelegate <NSObject>
+
+- (void)notifyLikeUpdates;
+
+@end
+
 @interface PostDetailsView : UIView
 
 @property (weak, nonatomic) IBOutlet PFImageView *postPFImageView;
@@ -24,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *numberLikesLabel;
 
 @property (nonatomic, strong) Post *post;
+@property (nonatomic, weak) id<PostDetailsViewDelegate> delegate;
 
 @end
 

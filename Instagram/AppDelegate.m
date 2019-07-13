@@ -33,13 +33,13 @@
         
         UIViewController *homeScreenViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeScreenViewController"];
         UINavigationController *homeScreenNavigationController = [[UINavigationController alloc] initWithRootViewController:homeScreenViewController];
-        UITabBarItem *allPostsTab = [[UITabBarItem alloc] initWithTitle:@"All Posts" image:nil tag:1];
+        UITabBarItem *allPostsTab = [[UITabBarItem alloc] initWithTitle:@"All Posts" image:[UIImage imageNamed:@"feed_tab"] tag:1];
         homeScreenViewController.title = @"All Posts";
         [homeScreenViewController setTabBarItem:allPostsTab];
         
         UIViewController *profileFeedViewController = [storyboard instantiateViewControllerWithIdentifier:@"ProfileFeedViewController"];
         UINavigationController *profileFeedNavigationController = [[UINavigationController alloc] initWithRootViewController:profileFeedViewController];
-        UITabBarItem *profilePostsTab = [[UITabBarItem alloc] initWithTitle:@"Your Posts" image:nil tag:1];
+        UITabBarItem *profilePostsTab = [[UITabBarItem alloc] initWithTitle:@"Your Posts" image:[UIImage imageNamed: @"profile_tab"] tag:1];
         profileFeedViewController.title = @"Your Posts";
         [profileFeedViewController setTabBarItem:profilePostsTab];
         

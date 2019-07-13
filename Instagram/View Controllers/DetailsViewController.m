@@ -10,7 +10,7 @@
 #import "PostDetailsView.h"
 #import "ProfilePageViewController.h"
 
-@interface DetailsViewController () <ProfilePageViewControllerDelegate>
+@interface DetailsViewController () <ProfilePageViewControllerDelegate, PostDetailsViewDelegate>
 
 @end
 
@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.postDetailsView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -27,6 +28,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if ([self isMovingFromParentViewController]) {
+        NSLog(@"%d", [self.post.arrayOfUsersWhoLiked containsObject:self.post.author.objectId]);
         [self.delegate updateDetailsData:self];
     }
 }
@@ -34,6 +36,13 @@
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
     self.post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
     self.postDetailsView.post = self.post;
+}
+
+- (void)notifyLikeUpdates {
+    self.post = self.postDetailsView.post;
+    NSLog(@"details controller post: %@ details view post %@: ", self.postDetailsView.post.objectId, self.post.objectId);
+    NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.post,@"post", self.postCellIndexPath, @"indexPath", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
 }
 
 #pragma mark - Navigation

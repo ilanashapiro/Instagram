@@ -20,8 +20,8 @@
 @dynamic likeCount;
 @dynamic commentCount;
 @dynamic datePosted;
-@dynamic liked;
 @dynamic authorBiography;
+@dynamic arrayOfUsersWhoLiked;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -35,7 +35,7 @@
     
     //newPost.liked = @NO;
     newPost.arrayOfUsersWhoLiked = [[NSMutableArray alloc]init];;
-    //NSLog(@"new array of users who liked: %d", newPost.arrayOfUsersWhoLiked == nil);
+    
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.datePosted = [NSDate date];

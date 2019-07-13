@@ -61,52 +61,66 @@
     
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [post.datePosted shortTimeAgoSinceNow]];
     
-    if ([post.liked intValue] == 0) {
-        [self.likeButton setSelected:NO];
+    if ([post.arrayOfUsersWhoLiked containsObject:post.author.objectId]) {
+        [self.likeButton setSelected:YES];
     }
     else {
-        [self.likeButton setSelected:YES];
+        [self.likeButton setSelected:NO];
     }
 }
 
 - (IBAction)didTapLike:(id)sender {
-    //Update the local model (tweet) properties to reflect it’s been favorited by updating the favorited bool and incrementing the favoriteCount.
-    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     NSLog(@"Tapped like!");
-    if ([self.post.liked intValue] == 0) {
-        // Retrieve the object by id
-        [query getObjectInBackgroundWithId:self.post.objectId block:^(PFObject *Post, NSError *error) {
-            if (!error) {
-                 self.post[@"liked"] = @YES;
-                 int likeCountInt = [self.post.likeCount intValue];
-                 NSNumber *likeCountNumber = [NSNumber numberWithInt:likeCountInt + 1];
-                 [self.likeButton setSelected:YES];
-                 self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", likeCountNumber];
-                 self.post[@"likeCount"] = likeCountNumber;
-                 [self.post saveInBackground];
-            }
-            else {
-                NSLog(@"error");
-            }
-         }];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    // Retrieve the object by id
+    [query getObjectInBackgroundWithId:self.post.objectId block:^(PFObject *postPFObject, NSError *error) {
+        Post *post = (Post *)postPFObject;
+        PFUser *user = post.author;
+        
+        NSLog(@"%@ %@ %d", post.arrayOfUsersWhoLiked, user.objectId, [post.arrayOfUsersWhoLiked containsObject:user.objectId]);
+        if (![post.arrayOfUsersWhoLiked containsObject:user.objectId]) {
+            [self setLiked:YES forPost:post user:user];
+        }
+        else {
+            [self setLiked:NO forPost:post user:user];
+        }
+        [self.delegate notifyLikeUpdates];
+        
+    }];
+}
+
+- (void)setLiked:(BOOL)liked forPost:(Post *)post user:(PFUser *)user {
+    int likeCountInt = [post.likeCount intValue];
+    NSNumber *likeCountNumber = [NSNumber numberWithInt:likeCountInt];
+    
+    if (liked) {
+        [post.arrayOfUsersWhoLiked addObject:user.objectId];
+        likeCountNumber = [NSNumber numberWithInt:likeCountInt + 1];
     }
     else {
-        // Retrieve the object by id
-        [query getObjectInBackgroundWithId:self.post.objectId block:^(PFObject *Post, NSError *error) {
-            if (!error) {
-                 self.post[@"liked"] = @NO;
-                 int likeCountInt = [self.post.likeCount intValue];
-                 NSNumber *likeCountNumber = [NSNumber numberWithInt:likeCountInt - 1];
-                 [self.likeButton setSelected:NO];
-                 self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", likeCountNumber];
-                 self.post[@"likeCount"] = likeCountNumber;
-                 [self.post saveInBackground];
+        [post.arrayOfUsersWhoLiked removeObject:user.objectId];
+        likeCountNumber = [NSNumber numberWithInt:likeCountInt - 1];
+    }
+    
+    [post setObject:post.arrayOfUsersWhoLiked forKey:@"arrayOfUsersWhoLiked"];
+    [post setObject:likeCountNumber forKey:@"likeCount"];
+    [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Post add to list of users who liked update failed: %@", error.localizedDescription);
+        }
+        else {
+            NSLog(@"like count %d", [post.likeCount intValue]);
+            if ([post.likeCount intValue] == 1) {
+                self.numberLikesLabel.text = [NSString stringWithFormat:@"1 like"];
             }
             else {
-                NSLog(@"error");
+                self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
             }
-         }];
-    }
+            [self.likeButton setSelected:liked];
+            NSLog(@"Post successfully updated!");
+        }
+    }];
 }
 
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {

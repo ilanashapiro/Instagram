@@ -42,6 +42,7 @@
         self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
     }
     
+   // NSLog(@"post: %@, users who liked: %@, author: %@", post, post.arrayOfUsersWhoLiked, post.author.objectId);
     if ([post.arrayOfUsersWhoLiked containsObject:post.author.objectId]) {
         [self.likeButton setSelected:YES];
     }
@@ -67,6 +68,7 @@
         UIImage *defaultImage = [self resizeImage:[UIImage imageNamed:@"emptyprofile"] withSize:CGSizeMake(20, 20)];
         [self.nameButton setImage:defaultImage forState:UIControlStateNormal];
     }
+    
     self.captionLabel.text = [NSString stringWithFormat:@"@%@ %@", post.author.username, post.caption];
 }
 
@@ -91,7 +93,6 @@
 }
 
 - (IBAction)didTapLike:(id)sender {
-    //PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     NSLog(@"Tapped like!");
     
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
@@ -100,56 +101,65 @@
         Post *post = (Post *)postPFObject;
         PFUser *user = post.author;
         
-        NSLog(@"%@ %@ %d", post.arrayOfUsersWhoLiked, user.objectId, [post.arrayOfUsersWhoLiked containsObject:user.objectId]);
+        //NSLog(@"%@ %@ %d", post.arrayOfUsersWhoLiked, user.objectId, [post.arrayOfUsersWhoLiked containsObject:user.objectId]);
+            
         if (![post.arrayOfUsersWhoLiked containsObject:user.objectId]) {
-            [self setLiked:@YES forPost:post user:user];
+            [self setLiked:YES forPost:post user:user];
         }
         else {
-            [self setLiked:@NO forPost:post user:user];
+            [self setLiked:NO forPost:post user:user];
         }
-            
     }];
-    
-     [self.delegate notifyLikeUpdates];
 }
 
 - (IBAction)didTapProfile:(id)sender {
     [self.delegate performSegueToProfile:self];
 }
 
-- (void)setLiked:(NSNumber *)liked forPost:(Post *)post user:(PFUser *)user {
-    int likeCountInt = [post.likeCount intValue];
-    NSNumber *likeCountNumber = [NSNumber numberWithInt:likeCountInt];
+- (void)setLiked:(BOOL)liked forPost:(Post *)post user:(PFUser *)user {
+    NSNumber *likeCountNumber = post.likeCount;
+    int likeCountInt = [likeCountNumber intValue];
     
-    if ([liked boolValue] == 1) {
+    if (liked) {
         [post.arrayOfUsersWhoLiked addObject:user.objectId];
+        //NSLog(@"%@ --- %@", post, post.arrayOfUsersWhoLiked);
         likeCountNumber = [NSNumber numberWithInt:likeCountInt + 1];
     }
     else {
         [post.arrayOfUsersWhoLiked removeObject:user.objectId];
         likeCountNumber = [NSNumber numberWithInt:likeCountInt - 1];
     }
-    NSLog(@"like count number %d", [likeCountNumber intValue]);
+    
+    //[self.likeButton setSelected:liked];
+    //NSLog(@"post: %@, post id: %@, users liked array: %@", post, post.objectId, post.arrayOfUsersWhoLiked);
+    NSLog(@"post array liked: %@", post.arrayOfUsersWhoLiked);
+    self.post.arrayOfUsersWhoLiked = post.arrayOfUsersWhoLiked;
+    [self.delegate notifyLikeUpdates];
+    
+//    [self.delegate notifyLikeUpdates];
+    
     
     [post setObject:post.arrayOfUsersWhoLiked forKey:@"arrayOfUsersWhoLiked"];
     [post setObject:likeCountNumber forKey:@"likeCount"];
     [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error != nil) {
-            NSLog(@"Post add to list of users who liked update failed: %@", error.localizedDescription);
+            NSLog(@"Post list of users who liked update failed: %@", error.localizedDescription);
         }
         else {
-            NSLog(@"like count %d", [self.post.likeCount intValue]);
             if ([post.likeCount intValue] == 1) {
                 self.numberLikesLabel.text = [NSString stringWithFormat:@"1 like"];
             }
             else {
                 self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
             }
-            [self.likeButton setSelected:[liked boolValue]];
-            NSLog(@"Post add to list of users who liked successfully updated!");
+            self.post.likeCount = post.likeCount; //for the tab bars to update in the notification center
+//            NSLog(@"like count %d", [post.likeCount intValue]);
+//
+//            NSLog(@"button liked set to: %d", liked);
+//
+            NSLog(@"Post list of users who liked successfully updated!");
         }
     }];
-
 }
 
 @end
