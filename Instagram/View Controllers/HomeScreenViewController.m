@@ -59,11 +59,10 @@
                     [postsArrayMutable replaceObjectAtIndex:index withObject:newPostFromProfileFeed];
                     self.postsArray = postsArrayMutable;
                 }
+                
                 index ++;
             }
-            
         }
-        
         [self.tableView reloadData];
     }
 }

@@ -17,14 +17,6 @@
 
 @implementation PostDetailsView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 - (void)setPost:(Post *)post {
     _post = post;
     
@@ -61,7 +53,7 @@
     
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [post.datePosted shortTimeAgoSinceNow]];
     
-    if ([post.arrayOfUsersWhoLiked containsObject:post.author.objectId]) {
+    if ([post.arrayOfUsersWhoLiked containsObject:[PFUser currentUser].objectId]) {
         [self.likeButton setSelected:YES];
     }
     else {
@@ -76,9 +68,7 @@
     // Retrieve the object by id
     [query getObjectInBackgroundWithId:self.post.objectId block:^(PFObject *postPFObject, NSError *error) {
         Post *post = (Post *)postPFObject;
-        PFUser *user = post.author;
-        
-        NSLog(@"%@ %@ %d", post.arrayOfUsersWhoLiked, user.objectId, [post.arrayOfUsersWhoLiked containsObject:user.objectId]);
+        PFUser *user = [PFUser currentUser];
         if (![post.arrayOfUsersWhoLiked containsObject:user.objectId]) {
             [self setLiked:YES forPost:post user:user];
         }

@@ -93,13 +93,11 @@
 
 - (IBAction)didTapLike:(id)sender {
     NSLog(@"Tapped like!");
-    
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
         // Retrieve the object by id
         [query getObjectInBackgroundWithId:self.post.objectId block:^(PFObject *postPFObject, NSError *error) {
         Post *post = (Post *)postPFObject;
-        PFUser *user = post.author;
-            
+        PFUser *user = [PFUser currentUser];
         if (![post.arrayOfUsersWhoLiked containsObject:user.objectId]) {
             [self setLiked:YES forPost:post user:user];
         }

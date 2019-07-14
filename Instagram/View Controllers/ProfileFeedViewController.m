@@ -115,10 +115,6 @@
 }
 
 - (void)updateDetailsData:(nonnull DetailsViewController *)detailsViewController {
-    /*Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
-    post.liked = detailsViewController.postDetailsView.post.liked;
-    post.likeCount = detailsViewController.postDetailsView.post.likeCount;
-    [self.tableView reloadData];*/
     Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
     BOOL detailsPostLiked = [detailsViewController.post.arrayOfUsersWhoLiked containsObject:detailsViewController.post.author.objectId];
     BOOL feedPostLikedBeforeDetails = [post.arrayOfUsersWhoLiked containsObject:post.author.objectId];
@@ -179,7 +175,7 @@
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Post *post = self.postsArray[indexPath.row];
-        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; //returns a UIViewController, which DetailsViewController is a subclass of
+        ProfilePageViewController *profilePageViewController = [segue destinationViewController]; 
         profilePageViewController.post = post;
         profilePageViewController.delegate = self;
         NSLog(@"Tapping on user profile by: %@", post.author.username);
