@@ -155,7 +155,7 @@
             
             self.post.arrayOfUsersWhoLiked = post.arrayOfUsersWhoLiked;
             self.post.likeCount = post.likeCount;
-            [self.delegate notifyLikeUpdates];//for the tab bars to update in the notification center
+            [self.delegate notifyLikeUpdates:self.post];//for the tab bars to update in the notification center
 
 //            NSLog(@"like count %d", [post.likeCount intValue]);
 //

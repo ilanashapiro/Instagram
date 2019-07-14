@@ -12,6 +12,8 @@
 
 @interface DetailsViewController () <ProfilePageViewControllerDelegate, PostDetailsViewDelegate>
 
+@property (weak, nonatomic) IBOutlet PostDetailsView *postDetailsView;
+
 @end
 
 @implementation DetailsViewController
@@ -38,14 +40,14 @@
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
     self.post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
-    self.postDetailsView.post = self.post;
+    //self.postDetailsView.post = self.post;
 }
 
 - (void)notifyLikeUpdates {
-    self.post = self.postDetailsView.post;
+    //self.post = self.postDetailsView.post;
     //NSLog(@"details controller post id: %@ details view post id %@: ", self.postDetailsView.post.objectId, self.post.objectId);
     self.detailsPostLiked = YES;
-    [self.delegate updateDetailsData:self];
+    //[self.delegate updateDetailsData:self];
 }
 
 #pragma mark - Navigation

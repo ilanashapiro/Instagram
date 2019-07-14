@@ -45,10 +45,26 @@
     if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
         NSLog (@"Successfully received the change tab bar data notification on home feed!");
         NSArray *newPostsArray = [[notification userInfo] objectForKey:@"postsArray"];
-        NSLog(@"posts array: %@", self.postsArray);
+        NSLog(@"posts array---------: %@", self.postsArray);
+
         if (newPostsArray) {
             self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
+            NSLog(@"posts array is now----------: %@", self.postsArray);
         }
+        else { //means a post was changed in the profile feed, and since the posts are filtered there, we have to find the post in the home feed and change it rather than set the entire home feed posts array to the filtered version in profile feed, which would mean then the home feed would be indifferent from profile feed
+            Post *newPostFromProfileFeed = [[notification userInfo] objectForKey:@"postLiked"];
+            int index = 0;
+            for (Post *post in self.postsArray) {
+                if ([post.objectId isEqualToString:newPostFromProfileFeed.objectId]) {
+                    NSMutableArray *postsArrayMutable = [self.postsArray mutableCopy];
+                    [postsArrayMutable replaceObjectAtIndex:index withObject:newPostFromProfileFeed];
+                    self.postsArray = postsArrayMutable;
+                }
+                index ++;
+            }
+            
+        }
+        
         [self.tableView reloadData];
         /*if (![[notification userInfo] objectForKey:@"postsArray"]) {
             //means like occurred in details view
@@ -100,6 +116,7 @@
         if (posts) {
             // do something with the data fetched
             self.postsArray = posts;
+            //NSLog(@"self.posts array home screen: %@", self.postsArray);
             [self.tableView reloadData];
         }
         else {
@@ -138,10 +155,10 @@
         [post.arrayOfUsersWhoLiked addObject:post.author.objectId];
     }
     
-    post.likeCount = detailsViewController.postDetailsView.post.likeCount;
+    post.likeCount = detailsViewController.post.likeCount;
     
     if (detailsViewController.detailsPostLiked) {
-        [self notifyLikeUpdates];
+        [self notifyLikeUpdates:post];
     }
     else {
         [self.tableView reloadData];
@@ -161,7 +178,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
 }
 
-- (void)notifyLikeUpdates {
+- (void)notifyLikeUpdates:(Post *)post {
 //    NSLog(@"notify of post cell array liked: %@", postCell.post.arrayOfUsersWhoLiked);
 //    NSMutableArray *postsArrayMutable = [self.postsArray mutableCopy];
 //    postsArrayMutable[postCell.indexPath.row] = postCell.post;

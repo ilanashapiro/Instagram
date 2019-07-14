@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol PostCellDelegate <NSObject>
 
-- (void)notifyLikeUpdates;
+- (void)notifyLikeUpdates:(Post *)post;
 - (void)performSegueToProfile:(UITableViewCell *)postCell;
 
 @end

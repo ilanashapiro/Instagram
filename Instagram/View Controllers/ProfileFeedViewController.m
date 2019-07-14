@@ -49,11 +49,20 @@
 - (void)receiveNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
         NSLog (@"Successfully received the change tab bar data notification on home feed!");
-        NSArray *newPostsArray = [[notification userInfo] objectForKey:@"postsArray"];
+        NSArray *newPostsArrayFromHomeFeed = [[notification userInfo] objectForKey:@"postsArray"];
+        //Post *newPostFromProfileFeed = [[notification userInfo] objectForKey:@"postLikedID"];
         NSLog(@"posts array: %@", self.postsArray);
-        if (newPostsArray) {
+        if (newPostsArrayFromHomeFeed) {
             self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
+            NSPredicate *postsBySelf = [NSPredicate predicateWithFormat:
+                                     @"SELF.%K IN %@", @"author.objectId", [PFUser currentUser].objectId];
+            self.postsArray = [self.postsArray filteredArrayUsingPredicate:postsBySelf];
+            //NSLog(@"POSTS BY SELF: %@", self.postsArray);
+            
         }
+//        else if (newPostFromProfileFeed) {
+//
+//        }
         [self.tableView reloadData];
         
         
@@ -100,6 +109,7 @@
         if (posts) {
             // do something with the data fetched
             self.postsArray = posts;
+            //NSLog(@"self.posts array profile: %@", self.postsArray);
             [self.tableView reloadData];
         }
         else {
@@ -141,8 +151,14 @@
         [post.arrayOfUsersWhoLiked addObject:post.author.objectId];
     }
     
-    post.likeCount = detailsViewController.postDetailsView.post.likeCount;
-    [self.tableView reloadData];
+    post.likeCount = detailsViewController.post.likeCount;
+    
+    if (detailsViewController.detailsPostLiked) {
+        [self notifyLikeUpdates:post];
+    }
+    else {
+        [self.tableView reloadData];
+    }
     
 }
 
@@ -156,8 +172,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
 }
 
-- (void)notifyLikeUpdates {
-    NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];
+- (void)notifyLikeUpdates:(Post *)postLiked {
+    NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:postLiked,@"postLiked", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
 }
 
