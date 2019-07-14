@@ -30,11 +30,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    /*if ([self isMovingFromParentViewController]) {
-        NSLog(@"%d", [self.post.arrayOfUsersWhoLiked containsObject:self.post.author.objectId]);
-         [self.delegate updateDetailsData:self];
-        
-    }*/
     [self.delegate updateDetailsData:self];
 }
 
@@ -44,10 +39,7 @@
 }
 
 - (void)notifyLikeUpdates {
-    //self.post = self.postDetailsView.post;
-    //NSLog(@"details controller post id: %@ details view post id %@: ", self.postDetailsView.post.objectId, self.post.objectId);
     self.detailsPostLiked = YES;
-    //[self.delegate updateDetailsData:self];
 }
 
 #pragma mark - Navigation

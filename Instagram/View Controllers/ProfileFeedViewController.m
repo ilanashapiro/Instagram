@@ -42,39 +42,19 @@
     [self createRefreshControl];
 }
 
-/*- (void)viewWillAppear:(BOOL)animated {
-    [self fetchPosts];
-}*/
-
 - (void)receiveNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
         NSLog (@"Successfully received the change tab bar data notification on home feed!");
         NSArray *newPostsArrayFromHomeFeed = [[notification userInfo] objectForKey:@"postsArray"];
-        //Post *newPostFromProfileFeed = [[notification userInfo] objectForKey:@"postLikedID"];
-        NSLog(@"posts array: %@", self.postsArray);
+        
         if (newPostsArrayFromHomeFeed) {
             self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
             NSPredicate *postsBySelf = [NSPredicate predicateWithFormat:
                                      @"SELF.%K IN %@", @"author.objectId", [PFUser currentUser].objectId];
             self.postsArray = [self.postsArray filteredArrayUsingPredicate:postsBySelf];
-            //NSLog(@"POSTS BY SELF: %@", self.postsArray);
-            
         }
-//        else if (newPostFromProfileFeed) {
-//
-//        }
+
         [self.tableView reloadData];
-        
-        
-        
-        /*if ([[notification userInfo] objectForKey:@"postsArray"] == nil) {
-            //means like occurred in details view
-            [self fetchPosts];
-        }
-        else {
-            self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
-            [self.tableView reloadData];
-        }*/
     }
 }
 
@@ -109,7 +89,6 @@
         if (posts) {
             // do something with the data fetched
             self.postsArray = posts;
-            //NSLog(@"self.posts array profile: %@", self.postsArray);
             [self.tableView reloadData];
         }
         else {

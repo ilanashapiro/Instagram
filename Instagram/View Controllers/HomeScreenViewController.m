@@ -45,13 +45,12 @@
     if ([[notification name] isEqualToString:@"ChangedTabBarDataNotification"]) {
         NSLog (@"Successfully received the change tab bar data notification on home feed!");
         NSArray *newPostsArray = [[notification userInfo] objectForKey:@"postsArray"];
-        NSLog(@"posts array---------: %@", self.postsArray);
 
         if (newPostsArray) {
             self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
-            NSLog(@"posts array is now----------: %@", self.postsArray);
         }
-        else { //means a post was changed in the profile feed, and since the posts are filtered there, we have to find the post in the home feed and change it rather than set the entire home feed posts array to the filtered version in profile feed, which would mean then the home feed would be indifferent from profile feed
+        else {
+        //means a post was changed in the profile feed, and since the posts are filtered there, we have to find the post in the home feed and change it rather than set the entire home feed posts array to the filtered version in profile feed, which would mean then the home feed would be indifferent from profile feed
             Post *newPostFromProfileFeed = [[notification userInfo] objectForKey:@"postLiked"];
             int index = 0;
             for (Post *post in self.postsArray) {
@@ -66,23 +65,6 @@
         }
         
         [self.tableView reloadData];
-        /*if (![[notification userInfo] objectForKey:@"postsArray"]) {
-            //means like occurred in details view
-            NSIndexPath *indexPath = [[notification userInfo] objectForKey:@"indexPath"];
-            
-            NSMutableArray *postsArrayMutable = [self.postsArray mutableCopy];
-            postsArrayMutable[indexPath.row] = [[notification userInfo] objectForKey:@"post"];
-            NSLog(@"row %ld", indexPath.row);
-            self.postsArray = postsArrayMutable;
-            
-            [self.tableView reloadData];
-        }
-        else {
-            NSLog(@"posts before reload array: %@", self.postsArray);
-            self.postsArray = [[notification userInfo] objectForKey:@"postsArray"];
-            NSLog(@"posts after reload array: %@", self.postsArray);
-            [self.tableView reloadData];
-        }*/
     }
 }
 
@@ -116,7 +98,6 @@
         if (posts) {
             // do something with the data fetched
             self.postsArray = posts;
-            //NSLog(@"self.posts array home screen: %@", self.postsArray);
             [self.tableView reloadData];
         }
         else {
@@ -146,7 +127,7 @@
     Post *post = self.postsArray[detailsViewController.postCellIndexPath.row];
     BOOL detailsPostLiked = [detailsViewController.post.arrayOfUsersWhoLiked containsObject:detailsViewController.post.author.objectId];
     BOOL feedPostLikedBeforeDetails = [post.arrayOfUsersWhoLiked containsObject:post.author.objectId];
-//    NSLog(@"details: %d, before details: %d", detailsPostLiked, feedPostLikedBeforeDetails);
+    
     if (!detailsPostLiked && feedPostLikedBeforeDetails) {
         [post.arrayOfUsersWhoLiked removeObject:post.author.objectId];
     }
@@ -179,13 +160,6 @@
 }
 
 - (void)notifyLikeUpdates:(Post *)post {
-//    NSLog(@"notify of post cell array liked: %@", postCell.post.arrayOfUsersWhoLiked);
-//    NSMutableArray *postsArrayMutable = [self.postsArray mutableCopy];
-//    postsArrayMutable[postCell.indexPath.row] = postCell.post;
-//    self.postsArray = postsArrayMutable;
-    
-    //NSLog(@"post that was changed%@", self.postsArray[postCell.indexPath.row]);
-    
     NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChangedTabBarDataNotification" object:self userInfo:postsInfoDict];
 }
@@ -207,7 +181,6 @@
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.post = post;
         detailsViewController.postCellIndexPath = indexPath;
-        NSLog(@"initial row: %ld", indexPath.row);
         detailsViewController.delegate = self;
         NSLog(@"Tapping on a post by: %@", post.author.username);
     }
@@ -218,7 +191,7 @@
         ProfilePageViewController *profilePageViewController = [segue destinationViewController];
         profilePageViewController.post = post;
         profilePageViewController.delegate = self;
-        NSLog(@"Tapping on user profile: %@", post.author.username);
+        NSLog(@"Tapping on user profile by: %@", post.author.username);
     }
 }
 
