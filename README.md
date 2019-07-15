@@ -2,7 +2,7 @@
 
 **Instagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **approx. 25-27** hours spent in total
+Time spent: **approx. 30** hours spent in total
 
 ## User Stories
 
@@ -40,7 +40,8 @@ The following **additional** features are implemented:
 - [X] You can click on a user's name/profile photo in all views (home, your posts only, and detail view) to go to the profile page for that user. 
 - [X] Profile page contains a bio text field for each user that can be seen for any user and edited for the current user, bio is saved in Parse
 - [X] Profile pages are only editable (meaning you can only change profile pic and bio) for the currently logged in user.
-
+- [X] Likes are smoothly updated without unnecessary requests to the database for all views (home feed, profile feed, and detail views) when a post is liked in any view. Like count and like button selected state are updated. 
+    - [X] Also, likes from other users are saved and reflected in the like count of the posts, and likes of users are saved across logins/logouts.  (an array of all users who like the post is kept for each post in the database)
 
 - [X] List anything else that you can get done to improve the app functionality!
     - Adding comment functionality especially would be nice

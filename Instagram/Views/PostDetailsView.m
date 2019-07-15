@@ -49,7 +49,7 @@
     else {
         self.numberLikesLabel.text = [NSString stringWithFormat:@"%@ likes", post.likeCount];
     }
-    self.captionLabel.text = [NSString stringWithFormat:@"%@ %@", post.author.username, post.caption];
+    self.captionLabel.text = [NSString stringWithFormat:@"@%@ %@", post.author.username, post.caption];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [post.datePosted shortTimeAgoSinceNow]];
     
