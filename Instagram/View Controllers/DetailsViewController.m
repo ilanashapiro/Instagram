@@ -34,8 +34,10 @@
 }
 
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
-    self.post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
-    self.postDetailsView.post = self.post;
+    if ([profilePageViewController.post.author objectForKey:@"profileImage"]) {
+        self.post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
+        self.postDetailsView.post = self.post;
+    }
 }
 
 - (void)notifyLikeUpdates {

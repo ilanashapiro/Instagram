@@ -140,7 +140,9 @@
 - (void)updateProfileData:(nonnull ProfilePageViewController *)profilePageViewController {
     for (Post *post in self.postsArray) {
         //since all posts are by current user in this tab, all profile pics will be updated
-        post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
+        if ([profilePageViewController.post.author objectForKey:@"profileImage"]) {
+            post.author[@"profileImage"] = profilePageViewController.post.author[@"profileImage"];
+        }
     }
     
     NSDictionary *postsInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:self.postsArray,@"postsArray", nil];

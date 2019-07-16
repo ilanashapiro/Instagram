@@ -31,6 +31,7 @@
     [self loadUserData];
     
     self.bioTextField.delegate = self;
+    self.bioWasEdited = NO;
     
     NSString *authorName = [NSString stringWithFormat:@"%@", self.post.author.username];
     NSString *userName = [NSString stringWithFormat:@"%@", [PFUser currentUser][@"username"]];

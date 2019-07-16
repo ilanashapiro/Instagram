@@ -763,7 +763,7 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="apf-G9-DCE" kind="show" identifier="profilePageSegue" id="diw-5L-9yD"/>
+                                                        <action selector="didTapProfile:" destination="NJe-jC-K9P" eventType="touchUpInside" id="QcS-pu-jL9"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -836,6 +836,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="C6n-Xi-JhE" id="qkT-8x-8Ow"/>
+                        <segue destination="apf-G9-DCE" kind="show" identifier="profilePageSegue" id="Zud-R4-3T8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lE7-kx-rkm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1001,7 +1002,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jtC-h0-Gka"/>
-        <segue reference="diw-5L-9yD"/>
+        <segue reference="Zud-R4-3T8"/>
         <segue reference="wTp-SX-Z5w"/>
         <segue reference="G0Z-Md-jj6"/>
     </inferredMetricsTieBreakers>
